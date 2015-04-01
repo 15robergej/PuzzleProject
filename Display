@@ -1,1 +1,60 @@
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+
+public class Display {
+	
+	public static JPanel makeFrame() {
+		final JFrame frame = new JFrame();	
+		frame.setTitle("Puzzle");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setMinimumSize(new Dimension(1100, 900));
+		frame.setVisible(true);
+		return frame;
+	}
+	public static void restartButton(final JFrame myFrame) {
+		final JButton restartButton = new JButton("Restart");
+		
+		
+		class RestartListener implements ActionListener {
+			public void actionPerformed(ActionEvent event){
+				//what it does
+			}
+		}
+		
+		ActionListener restart = new RestartListener();
+		restartButton.addActionListener(restart);
+		//add a layout
+		restartButton.setBounds(0, 0, 150, 50);
+		myFrame.getContentPane().add(restartButton);	
+	}
+	
+	public static void solveButton(final JFrame myFrame) {
+		final JButton solveButton = new JButton("Solve");
+		
+		
+		class SolveListener implements ActionListener {
+			public void actionPerformed(ActionEvent event){
+				//what it does
+			}
+		}
+		
+		ActionListener solve = new SolveListener();
+		solveButton.addActionListener(solve);
+		//add a layout
+		solveButton.setBounds(100, 0, 100, 50);
+		myFrame.getContentPane().add(solveButton);	
+	}
+	
+	public static void main(String[] args){
+		final JFrame frame = makeFrame();
+		
+		restartButton(frame);
+		solveButton(frame);
+	}
+}
