@@ -1,10 +1,12 @@
-
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 public class Display {
@@ -17,7 +19,9 @@ public class Display {
 		frame.setVisible(true);
 		return frame;
 	}
-	public static void restartButton(final JFrame myFrame) {
+	
+	
+	public static void restartButton(GridBagConstraints c, JPanel panel) {
 		final JButton restartButton = new JButton("Restart");
 		
 		
@@ -30,8 +34,8 @@ public class Display {
 		ActionListener restart = new RestartListener();
 		restartButton.addActionListener(restart);
 		//add a layout
-		restartButton.setBounds(0, 0, 150, 50);
-		myFrame.getContentPane().add(restartButton);	
+		
+		panel.add(restartButton, c);	
 	}
 	
 	public static void solveButton(final JFrame myFrame) {
@@ -53,8 +57,9 @@ public class Display {
 	
 	public static void main(String[] args){
 		final JFrame frame = makeFrame();
-		
-		restartButton(frame);
-		solveButton(frame);
+		final JPanel panel = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		restartButton(c, panel);
+		//solveButton(c, panel);
 	}
 }
