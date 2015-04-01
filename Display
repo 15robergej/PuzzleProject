@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 
 public class Display {
 	
-	public static JPanel makeFrame() {
+	public static JFrame makeFrame() {
 		final JFrame frame = new JFrame();	
 		frame.setTitle("Puzzle");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
