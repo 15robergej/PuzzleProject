@@ -38,7 +38,7 @@ public class Display {
 		panel.add(restartButton, c);	
 	}
 	
-	public static void solveButton(final JFrame myFrame) {
+	public static void solveButton(GridBagConstraints c, JPanel panel) {
 		final JButton solveButton = new JButton("Solve");
 		
 		
@@ -52,14 +52,17 @@ public class Display {
 		solveButton.addActionListener(solve);
 		//add a layout
 		solveButton.setBounds(100, 0, 100, 50);
-		myFrame.getContentPane().add(solveButton);	
+		panel.add(solveButton);	
 	}
 	
 	public static void main(String[] args){
 		final JFrame frame = makeFrame();
 		final JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
+		frame.add(panel);
+		panel.setVisible(true);
+	
 		restartButton(c, panel);
-		//solveButton(c, panel);
+		solveButton(c, panel);
 	}
 }
