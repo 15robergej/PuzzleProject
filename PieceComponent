@@ -1,1 +1,32 @@
+import javax.swing.JComponent;
+
+
+public class PieceComponent extends JComponent{
+
+	int HEARTS_IN = -1;
+	int HEART_OUT = 1;
+	int CLUBS_IN = -2;
+	int CLUBS_OUT = 2;
+	int DIAMONDS_IN = -3;
+	int DIAMONDS_OUT = 3;
+	int SPADES_IN = -4;
+	int SPADES_OUT = 4;
+	
+	
+	Piece a = new Piece([CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN]);
+	Piece b = new Piece([SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN]);
+	Piece c = new Piece([HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN]);
+	Piece d = new Piece([HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN]);
+	Piece e = new Piece([SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN]);
+	Piece f = new Piece([HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN]);
+	Piece g = new Piece([SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT]);
+	Piece h = new Piece([CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN]);
+	Piece i = new Piece([CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT]);
+	
+	
+	
+	public static void rotate(Piece piece, int rotations){
+		piece.rotate(rotations);
+		}
+}
 
