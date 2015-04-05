@@ -1,46 +1,59 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.event.MenuDragMouseListener;
 
 
 public class Display {
 	
-	public static JFrame makeFrame() {
+	public static JFrame makeFrame(int width, int height) {
 		final JFrame frame = new JFrame();	
 		frame.setTitle("Puzzle");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setMinimumSize(new Dimension(1100, 900));
+		frame.setMinimumSize(new Dimension(600, 600));
+		frame.setSize(width, height);
 		frame.setVisible(true);
 		return frame;
 	}
 	
 	
-	public static void restartButton(GridBagConstraints c, JPanel panel) {
+	public static void restartButton(JPanel panel) {
 		final JButton restartButton = new JButton("Restart");
 		
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.insets = new Insets(0, 0, 50, 0);
+	//	c.anchor = GridBagConstraints.LAST_LINE_END;
+		panel.add(restartButton, c);
 		
 		class RestartListener implements ActionListener {
 			public void actionPerformed(ActionEvent event){
 				//what it does
 			}
 		}
-		
 		ActionListener restart = new RestartListener();
 		restartButton.addActionListener(restart);
-		//add a layout
-		
-		panel.add(restartButton, c);	
+	
 	}
 	
-	public static void solveButton(GridBagConstraints c, JPanel panel) {
+	public static void solveButton(JPanel panel) {
 		final JButton solveButton = new JButton("Solve");
-		
 		
 		class SolveListener implements ActionListener {
 			public void actionPerformed(ActionEvent event){
@@ -50,19 +63,72 @@ public class Display {
 		
 		ActionListener solve = new SolveListener();
 		solveButton.addActionListener(solve);
-		//add a layout
-		solveButton.setBounds(100, 0, 100, 50);
-		panel.add(solveButton);	
+	//	solveButton.setBounds(100, 0, 100, 50);
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 1;
+		c.gridy = 0;
+		c.insets = new Insets(0, 0, 50, 0);
+	//	c.anchor = GridBagConstraints.EAST;
+		panel.add(solveButton,c);	
 	}
+	
+	public static void addBoard(JPanel panel) {
+		
+		final JPanel board=new JPanel(new GridBagLayout()); //layout??
+	
+		board.setBackground(Color.blue);
+		board.setVisible(true);
+		
+//		GridBagConstraints c = new GridBagConstraints();
+//		c.gridwidth=2;
+//		c.gridheight=2;
+//		c.gridx = 3;
+//		c.gridy = 0;
+//		c.insets = new Insets(0, 0, 0, 0);
+//		c.fill = GridBagConstraints.BOTH;
+	//	c.anchor = GridBagConstraints.EAST;
+		panel.add(board);
+		
+		//drag listener?
+	
+	}
+	
+	public static void addPieces(JPanel panel) {
+		
+			final JPanel pieces=new JPanel(); //layout??
+	
+			pieces.setBounds(0, 0, 200, 300);
+		//	pieces.setSize(100, 300);
+			pieces.setBackground(Color.blue);
+			pieces.setVisible(true);
+			
+//			GridBagConstraints c = new GridBagConstraints();
+			//	c.gridwidth=3;
+			//	c.gridheight=6;
+		//	c.gridx = 0;
+			//c.gridy = 0;
+		//	c.insets = new Insets(0, 0, 0, 0);
+		//	c.fill = GridBagConstraints.BOTH;
+		//	c.anchor = GridBagConstraints.EAST;
+			panel.add(pieces);
+			
+			//drag listener?
+		
+		}
 	
 	public static void main(String[] args){
-		final JFrame frame = makeFrame();
+		final JFrame frame = makeFrame(600,600);
+		
 		final JPanel panel = new JPanel(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		frame.add(panel);
+		frame.add(panel,BorderLayout.CENTER);
 		panel.setVisible(true);
-	
-		restartButton(c, panel);
-		solveButton(c, panel);
+		restartButton(panel);
+		solveButton(panel);
+	//	addBoard(panel);
+	//	addPieces(panel);	
+		
+		
 	}
 }
+
+	           
