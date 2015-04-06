@@ -11,6 +11,7 @@ public class PieceComponent extends JComponent{
 	int DIAMONDS_OUT = 3;
 	int SPADES_IN = -4;
 	int SPADES_OUT = 4;
+	//Maybe use enums although I'm not too sure how they work.
 	
 	
 	Piece a = new Piece([CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN]);
