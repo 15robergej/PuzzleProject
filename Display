@@ -57,7 +57,7 @@ public class Display {
 		
 		class SolveListener implements ActionListener {
 			public void actionPerformed(ActionEvent event){
-				//what it does
+				PuzzlePanel.solve();
 			}
 		}
 		
@@ -120,10 +120,13 @@ public class Display {
 		final JFrame frame = makeFrame(600,600);
 		
 		final JPanel panel = new JPanel(new GridBagLayout());
-		frame.add(panel,BorderLayout.CENTER);
+		final JPanel panel1= new JPanel(new GridBagLayout());
+		frame.add(panel,BorderLayout.EAST);
+		frame.add(panel1,BorderLayout.WEST);
+	
 		panel.setVisible(true);
 		restartButton(panel);
-		solveButton(panel);
+		solveButton(panel1);
 	//	addBoard(panel);
 	//	addPieces(panel);	
 		
