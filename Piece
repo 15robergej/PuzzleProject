@@ -1,0 +1,17 @@
+
+public class Piece {
+	public Piece(int north, int east, int south, int west){}
+
+	public Piece(int[] edges){}// array containing north, east, south, west in that order
+
+	public int getEdge(int direction){return 0;}
+
+	//Rotates the piece rotations x 90 degrees clockwise
+	public void rotate(int rotations){}
+
+	//Rotates the piece 90 degrees clockwise
+	public void rotate(){}
+
+	public String toString(){return "";}
+}
+
