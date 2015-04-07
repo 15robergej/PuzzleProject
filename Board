@@ -1,0 +1,43 @@
+
+public class Board {
+
+	public Board(int rows, int cols){
+		
+	}
+	public Board(int sides){
+
+	}
+	public Piece setPiece(int row, int col, Piece p){
+		return null;
+	}
+	public Piece removePiece(int row, int col){
+		return null;
+	}
+	public Piece getPiece(int row, int col){
+		return null;
+	}
+	public void clear(){
+		
+	}
+	public boolean hasPiece(int row, int col){
+		return false;
+	}
+	public boolean isValid(int row, int col){
+		return false;
+	}
+	public int getRows(){
+		return 0;
+	}
+	public int getCols(){
+		return 0;
+	}
+	public String toString(){
+		return "";
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	
+}
