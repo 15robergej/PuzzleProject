@@ -1,3 +1,6 @@
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.JComponent;
 
 
@@ -13,7 +16,7 @@ public class PieceComponent extends JComponent{
 	int SPADES_OUT = 4;
 	//Maybe use enums although I'm not too sure how they work.
 	
-	
+
 	Piece a = new Piece(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN);
 	Piece b = new Piece(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN);
 	Piece c = new Piece(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN);
@@ -23,11 +26,24 @@ public class PieceComponent extends JComponent{
 	Piece g = new Piece(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT);
 	Piece h = new Piece(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN);
 	Piece i = new Piece(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT);
+
+	Piece [] z = {a, b, c, d, e, f, g, h, i};
+
+	public void paintComponent(Graphics g){
+		Graphics2D g2 = (Graphics2D) g;
+		for(Piece y: z){
+		g2.drawImage(BufferedImage img, BufferedImageOp op, int x, int y)
+		}
+		
+	}
+	
+	
+
 	
 	
 	
 	public static void rotate(Piece piece, int rotations){
 		piece.rotate(rotations);
-		}
+	}
 }
 
