@@ -26,7 +26,7 @@ public class Display {
 		final JFrame frame = new JFrame();	
 		frame.setTitle("Puzzle");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setMinimumSize(new Dimension(600, 600));
+		frame.setMinimumSize(new Dimension(800, 600));
 		frame.setSize(width, height);
 		frame.setVisible(true);
 		return frame;
@@ -39,7 +39,7 @@ public class Display {
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
 		c.gridy = 0;
-		c.insets = new Insets(0, 0, 50, 0);
+		c.insets = new Insets(0, 0, 0, 0);
 	//	c.anchor = GridBagConstraints.LAST_LINE_END;
 		panel.add(restartButton, c);
 		
@@ -68,7 +68,7 @@ public class Display {
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 1;
 		c.gridy = 0;
-		c.insets = new Insets(0, 0, 50, 0);
+		c.insets = new Insets(0, 0, 0, 0);
 	//	c.anchor = GridBagConstraints.EAST;
 		panel.add(solveButton,c);	
 	}
@@ -97,6 +97,7 @@ public class Display {
 	public static void addPieces(JFrame frame) {
 		
 		final PieceComponent pieces= new PieceComponent();
+	
 		frame.add(pieces);
 		
 		}
@@ -106,13 +107,12 @@ public class Display {
 		
 		final JPanel panel = new JPanel(new GridBagLayout());
 		
-		frame.add(panel,BorderLayout.EAST);
+		frame.add(panel,BorderLayout.NORTH);
 		
 	//	panel.setVisible(true);
-	//	restartButton(panel);
-	//	solveButton(panel1);
+		restartButton(panel);
+		solveButton(panel);
 	//	addBoard(panel);
-		
 		
 		addPieces(frame);
 		
