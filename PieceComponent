@@ -88,14 +88,14 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(image, 0, 20, null);
-		g.drawImage(image2, 0, 120, null);
-		g.drawImage(image3, 0, 220, null);
-		g.drawImage(image4, 0, 320, null);
-		g.drawImage(image5, 0, 420, null);
-		g.drawImage(image6, 100, 20, null);
-		g.drawImage(image7, 100, 120, null);
-		g.drawImage(image8, 100, 220, null);
-		g.drawImage(image9, 100, 320, null);
+		g.drawImage(image2, 0, 140, null);
+		g.drawImage(image3, 0, 260, null);
+		g.drawImage(image4, 0, 380, null);
+		g.drawImage(image5, 0, 500, null);
+		g.drawImage(image6, 120, 20, null);
+		g.drawImage(image7, 120, 140, null);
+		g.drawImage(image8, 120, 260, null);
+		g.drawImage(image9, 120, 380, null);
 
 
 		//		AffineTransform at = new AffineTransform();
@@ -173,10 +173,9 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		Point clicked = e.getPoint();
-		Rectangle bounds = new Rectangle(0, 20, image.getWidth(), image.getHeight());
-		if (bounds.contains(clicked)) {
+		Rectangle bounds1 = new Rectangle(0, 20, image.getWidth(), image.getHeight());
+		if (bounds1.contains(clicked)) {
 			// target image was clicked
 			System.out.println("clicked");
 			AffineTransform at = new AffineTransform();
@@ -184,6 +183,18 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
 			image = op.filter(image, null);
 			image.createGraphics().drawImage(image, 0, 0, null);
+			this.repaint();
+		}
+		Rectangle bounds2 = new Rectangle(0, 140, image2.getWidth(), image2.getHeight());
+		if (bounds2.contains(clicked)) {
+			// target image was clicked
+			System.out.println("clicked");
+			AffineTransform at = new AffineTransform();
+			at.rotate(Math.PI/2, image2.getWidth() / 2, image2.getHeight() / 2);
+			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+			image2 = op.filter(image2, null);
+			image2.createGraphics().drawImage(image2, 0, 0, null);
+			this.repaint();
 		}
 
 	}
