@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -93,26 +94,10 @@ public class Display {
 	
 	}
 	
-	public static void addPieces(JPanel panel) {
+	public static void addPieces(JFrame frame) {
 		
-			final JPanel pieces=new JPanel(); //layout??
-	
-			pieces.setBounds(0, 0, 200, 300);
-		//	pieces.setSize(100, 300);
-			pieces.setBackground(Color.blue);
-			pieces.setVisible(true);
-			
-//			GridBagConstraints c = new GridBagConstraints();
-			//	c.gridwidth=3;
-			//	c.gridheight=6;
-		//	c.gridx = 0;
-			//c.gridy = 0;
-		//	c.insets = new Insets(0, 0, 0, 0);
-		//	c.fill = GridBagConstraints.BOTH;
-		//	c.anchor = GridBagConstraints.EAST;
-			panel.add(pieces);
-			
-			//drag listener?
+		final PieceComponent pieces= new PieceComponent();
+		frame.add(pieces);
 		
 		}
 	
@@ -120,15 +105,16 @@ public class Display {
 		final JFrame frame = makeFrame(600,600);
 		
 		final JPanel panel = new JPanel(new GridBagLayout());
-		final JPanel panel1= new JPanel(new GridBagLayout());
+		
 		frame.add(panel,BorderLayout.EAST);
-		frame.add(panel1,BorderLayout.WEST);
-	
-		panel.setVisible(true);
-		restartButton(panel);
-		solveButton(panel1);
+		
+	//	panel.setVisible(true);
+	//	restartButton(panel);
+	//	solveButton(panel1);
 	//	addBoard(panel);
-	//	addPieces(panel);	
+		
+		
+		addPieces(frame);
 		
 		
 	}
