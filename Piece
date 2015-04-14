@@ -1,17 +1,82 @@
 
 public class Piece {
-	public Piece(int north, int east, int south, int west){}
+	
+	public static final int NORTH = 0;
+	public static final int EAST = 1;
+	public static final int SOUTH = 2;
+	public static final int WEST = 3;
+	
+	public static final int HEARTS_IN = -1; 
+	public static final int HEARTS_OUT = 1;
+	public static final int DIAMONDS_IN = -2;
+	public static final int DIAMONDS_OUT = 2;
+	public static final int CLUBS_IN = -3;
+	public static final int CLUBS_OUT = 3;
+	public static final int SPADES_IN= -4;
+	public static final int SPADES_OUT = 4;
+	
+	private int[] edges;
+	private int orientation = 0;
+	
+	public Piece(int north, int east, int south, int west){
+		this.edges = new int[4];
+		edges[NORTH] = north;
+		edges[EAST] = east;
+		edges[SOUTH] = south;
+		edges[WEST] = west; 
+	}
 
-	public Piece(int[] edges){}// array containing north, east, south, west in that order
+	public Piece(int[] edges){
+		this.edges = new int[edges.length];
+		for(int i = 0; i < edges.length; i++){
+			this.edges[i] = edges[i];
+		}
+		
+	}
+	
+	public int getEdge(int direction){
+		return edges[direction];		
+	}
+	
+	public void rotate(int rotations){
+		for(int i = 0; i < rotations; i++){
+			rotate();
+		}
+	}
+	
+	public void rotate(){
+		int temp = edges[NORTH];
+		edges[NORTH] = edges[WEST];
+		edges[WEST] = edges[SOUTH];
+		edges[SOUTH] = edges[EAST];
+		edges[EAST] = temp;
+		
+		orientation++;
+		if (orientation == 4) orientation = 0;
+	}
+	
+	public int getOrientation(){
+		return orientation;
+	}
+	
+	public String toString(){
+		String p = "";
+		for(int i = 0; i < edges.length; i++){
+			p+= edges[i];
+		}
+		return p;
+	}
+	
+	public static void main(String[] args){
+		
+		int[]edges = {1, 2, 2, 3};
+		Piece p = new Piece(edges); 
+		System.out.println(p.toString());
+		p.rotate();
+		System.out.println(p.toString());
+		p.rotate(2);
+		System.out.println(p.toString());
+	}
 
-	public int getEdge(int direction){return 0;}
-
-	//Rotates the piece rotations x 90 degrees clockwise
-	public void rotate(int rotations){}
-
-	//Rotates the piece 90 degrees clockwise
-	public void rotate(){}
-
-	public String toString(){return "";}
 }
 
