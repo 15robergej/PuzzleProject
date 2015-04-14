@@ -1,3 +1,4 @@
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -43,115 +44,47 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 	Piece [] z = {a, b, c, d, e, f, g, h, i};
 
 
-	private BufferedImage image;
-	private BufferedImage image2;
-	private BufferedImage image3;
-	private BufferedImage image4;
-	private BufferedImage image5;
-	private BufferedImage image6;
-	private BufferedImage image7;
-	private BufferedImage image8;
-	private BufferedImage image9;
+//	private BufferedImage image;
+//	private BufferedImage image2;
+//	private BufferedImage image3;
+//	private BufferedImage image4;
+//	private BufferedImage image5;
+//	private BufferedImage image6;
+//	private BufferedImage image7;
+//	private BufferedImage image8;
+//	private BufferedImage image9;
+//
+//
+//	public PieceComponent() {
+//		addMouseListener(this);
+//		try {                
+//			image = ImageIO.read(this.getClass().getResource("piece_1.png"));
+//			image2 = ImageIO.read(this.getClass().getResource("piece_2.png"));
+//			image3 = ImageIO.read(this.getClass().getResource("piece_3.png"));
+//			image4 = ImageIO.read(this.getClass().getResource("piece_4.png"));
+//			image5 = ImageIO.read(this.getClass().getResource("piece_5.png"));
+//			image6 = ImageIO.read(this.getClass().getResource("piece_6.png"));
+//			image7 = ImageIO.read(this.getClass().getResource("piece_7.png"));
+//			image8 = ImageIO.read(this.getClass().getResource("piece_8.png"));
+//			image9 = ImageIO.read(this.getClass().getResource("piece_9.png"));
+//		} catch (IOException ex) {
+//			System.out.println("image not found");
+//		}
+//	}
 
-
-	//	    public PieceComponent() {
-	//	       try {                
-	//	          image = ImageIO.read(this.getClass().getResource("piece_1.png"));
-	//	       } catch (IOException ex) {
-	//	    	   System.out.println("image not found");
-	//	       }
-	//	    }
-	//	    @Override
-	//	    protected void paintComponent(Graphics g) {
-	//	        super.paintComponent(g);
-	//	        g.drawImage(image, 0, 0, null);           
-	//	    }
-
-	public PieceComponent() {
-		addMouseListener(this);
-		try {                
-			image = ImageIO.read(this.getClass().getResource("piece_1.png"));
-			image2 = ImageIO.read(this.getClass().getResource("piece_2.png"));
-			image3 = ImageIO.read(this.getClass().getResource("piece_3.png"));
-			image4 = ImageIO.read(this.getClass().getResource("piece_4.png"));
-			image5 = ImageIO.read(this.getClass().getResource("piece_5.png"));
-			image6 = ImageIO.read(this.getClass().getResource("piece_6.png"));
-			image7 = ImageIO.read(this.getClass().getResource("piece_7.png"));
-			image8 = ImageIO.read(this.getClass().getResource("piece_8.png"));
-			image9 = ImageIO.read(this.getClass().getResource("piece_9.png"));
-		} catch (IOException ex) {
-			System.out.println("image not found");
-		}
-	}
-
-	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.drawImage(image, 0, 20, null);
-		g.drawImage(image2, 0, 140, null);
-		g.drawImage(image3, 0, 260, null);
-		g.drawImage(image4, 0, 380, null);
-		g.drawImage(image5, 0, 500, null);
-		g.drawImage(image6, 120, 20, null);
-		g.drawImage(image7, 120, 140, null);
-		g.drawImage(image8, 120, 260, null);
-		g.drawImage(image9, 120, 380, null);
-
-
-		//		AffineTransform at = new AffineTransform();
-		//		 //at.translate(image.getWidth()/ 2, image.getHeight()/ 2);
-		//		//at.rotate(Math.PI/2);
-		//		//at.translate(-image.getWidth()/2, -image.getHeight()/2);
-		//		at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
-		//
-		//		   //Graphics2D g2d = (Graphics2D) g;
-		//		  //g2d.drawImage(image, at, null);
-		//
-		//		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-		//		image = op.filter(image, null);
-	}
-
-
-	//	public PieceComponent(int imageNum) {
-	//		try {                
-	//			image = ImageIO.read(this.getClass().getResource("piece_" + imageNum + ".png"));
-	//		} catch (IOException ex) {
-	//			System.out.println("image not found");
-	//		}
-	//	}
-	//
-	//	@Override
-	//	protected void paintComponent(Graphics g) {
-	//		super.paintComponent(g);
-	//		for(int i=1; i<3; i++){
-	//		g.drawImage(image, 0, 120*(i-1), null);
-	//		}
-	//	}
-
-
-
-	//	public void paintComponent(Graphics g){
-	//		Graphics2D g2 = (Graphics2D) g;
-	//
-	//		float[] scales = { 1f, 1f, 1f, 1f };
-	//		float[] offsets = new float[4];
-	//		RescaleOp rop = new RescaleOp(scales, offsets, null);
-	//		
-	//		BufferedImage image;{
-	//			try {                
-	//				for(int imageNumber = 1; imageNumber < 10; imageNumber++){
-	//					image = ImageIO.read(new File("src/piece_" + imageNumber + ".png"));
-	//					g2.drawImage(image, rop, 50, 30*imageNumber);
-	//				}
-	//			} catch (IOException ex) {
-	//				System.out.println("cannot find image");
-	//			}
-	//		}
-	//		
-	//	}
-
-
-
+//	@Override
+//	protected void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//		g.drawImage(image, 0, 20, null);
+//		g.drawImage(image2, 0, 140, null);
+//		g.drawImage(image3, 0, 260, null);
+//		g.drawImage(image4, 0, 380, null);
+//		g.drawImage(image5, 0, 500, null);
+//		g.drawImage(image6, 120, 20, null);
+//		g.drawImage(image7, 120, 140, null);
+//		g.drawImage(image8, 120, 260, null);
+//		g.drawImage(image9, 120, 380, null);
+//	}
 
 
 
@@ -173,29 +106,108 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Point clicked = e.getPoint();
-		Rectangle bounds1 = new Rectangle(0, 20, image.getWidth(), image.getHeight());
-		if (bounds1.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image = op.filter(image, null);
-			image.createGraphics().drawImage(image, 0, 0, null);
-			this.repaint();
-		}
-		Rectangle bounds2 = new Rectangle(0, 140, image2.getWidth(), image2.getHeight());
-		if (bounds2.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image2.getWidth() / 2, image2.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image2 = op.filter(image2, null);
-			image2.createGraphics().drawImage(image2, 0, 0, null);
-			this.repaint();
-		}
+//		Point clicked = e.getPoint();
+//		Rectangle bounds1 = new Rectangle(0, 20, image.getWidth(), image.getHeight());
+//		Rectangle bounds2 = new Rectangle(0, 140, image2.getWidth(), image2.getHeight());
+//		Rectangle bounds3 = new Rectangle(0, 260, image3.getWidth(), image3.getHeight());
+//		Rectangle bounds4 = new Rectangle(0, 380, image4.getWidth(), image4.getHeight());
+//		Rectangle bounds5 = new Rectangle(0, 500, image5.getWidth(), image5.getHeight());
+//		Rectangle bounds6 = new Rectangle(120, 20, image6.getWidth(), image6.getHeight());
+//		Rectangle bounds7 = new Rectangle(120, 140, image7.getWidth(), image7.getHeight());
+//		Rectangle bounds8 = new Rectangle(120, 260, image8.getWidth(), image8.getHeight());
+//		Rectangle bounds9 = new Rectangle(120, 380, image9.getWidth(), image9.getHeight());
+//		
+//		if (bounds1.contains(clicked)) {
+//			// target image was clicked
+//			System.out.println("clicked");
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
+//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//			image = op.filter(image, null);
+//			image.createGraphics().drawImage(image, 0, 0, null);
+//			this.repaint();
+//		}
+//		
+//		else if (bounds2.contains(clicked)) {
+//			// target image was clicked
+//			System.out.println("clicked");
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(Math.PI/2, image2.getWidth() / 2, image2.getHeight() / 2);
+//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//			image2 = op.filter(image2, null);
+//			image2.createGraphics().drawImage(image2, 0, 0, null);
+//			this.repaint();
+//		}
+//		else if (bounds3.contains(clicked)) {
+//			// target image was clicked
+//			System.out.println("clicked");
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(Math.PI/2, image3.getWidth() / 2, image3.getHeight() / 2);
+//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//			image3 = op.filter(image3, null);
+//			image3.createGraphics().drawImage(image3, 0, 0, null);
+//			this.repaint();
+//		}		
+//		else if (bounds4.contains(clicked)) {
+//			// target image was clicked
+//			System.out.println("clicked");
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(Math.PI/2, image4.getWidth() / 2, image4.getHeight() / 2);
+//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//			image4 = op.filter(image4, null);
+//			image4.createGraphics().drawImage(image4, 0, 0, null);
+//			this.repaint();
+//		}		
+//		else if (bounds5.contains(clicked)) {
+//			// target image was clicked
+//			System.out.println("clicked");
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(Math.PI/2, image5.getWidth() / 2, image5.getHeight() / 2);
+//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//			image5 = op.filter(image5, null);
+//			image5.createGraphics().drawImage(image5, 0, 0, null);
+//			this.repaint();
+//		}		
+//		else if (bounds6.contains(clicked)) {
+//			// target image was clicked
+//			System.out.println("clicked");
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(Math.PI/2, image6.getWidth() / 2, image6.getHeight() / 2);
+//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//			image6 = op.filter(image6, null);
+//			image6.createGraphics().drawImage(image6, 0, 0, null);
+//			this.repaint();
+//		}		
+//		else if (bounds7.contains(clicked)) {
+//			// target image was clicked
+//			System.out.println("clicked");
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(Math.PI/2, image7.getWidth() / 2, image7.getHeight() / 2);
+//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//			image7 = op.filter(image7, null);
+//			image7.createGraphics().drawImage(image7, 0, 0, null);
+//			this.repaint();
+//		}		
+//		else if (bounds8.contains(clicked)) {
+//			// target image was clicked
+//			System.out.println("clicked");
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(Math.PI/2, image8.getWidth() / 2, image8.getHeight() / 2);
+//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//			image8 = op.filter(image8, null);
+//			image8.createGraphics().drawImage(image8, 0, 0, null);
+//			this.repaint();
+//		}		
+//		else if (bounds9.contains(clicked)) {
+//			// target image was clicked
+//			System.out.println("clicked");
+//			AffineTransform at = new AffineTransform();
+//			at.rotate(Math.PI/2, image9.getWidth() / 2, image9.getHeight() / 2);
+//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//			image9 = op.filter(image9, null);
+//			image9.createGraphics().drawImage(image9, 0, 0, null);
+//			this.repaint();
+//		}
 
 	}
 
@@ -226,5 +238,4 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 
 
 }
-
 
