@@ -28,6 +28,7 @@ public class Display {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(800, 700));
 		frame.setSize(width, height);
+
 		return frame;
 	}
 	
@@ -121,9 +122,13 @@ public class Display {
 		solveButton(panel);
 	//	addBoard(panel);
 		
+	
 		addPuzzle(frame);
 		
 		frame.setVisible(true);
+		
+		
+		
 	}
 }
 
