@@ -3,7 +3,7 @@ import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel{
 
-	Puzzle a = new Puzzle(3, 3);
+	static Puzzle a = new Puzzle(3, 3);
 	
 	public static void restart(){
 		a.restart();
