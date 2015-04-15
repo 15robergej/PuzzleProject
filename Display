@@ -22,19 +22,33 @@ import javax.swing.event.MenuDragMouseListener;
 
 public class Display {
 	
-	public static JFrame makeFrame(int width, int height) {
-		final JFrame frame = new JFrame();	
+	private JFrame frame;
+	private JPanel panel;
+	private PuzzlePanel puzzlePanel;
+	private JButton restartButton, solveButton;
+	private JPanel board;
+	
+	public Display(){
+		makeFrame(600,600);
+		panel = new JPanel(new GridBagLayout());
+		frame.add(panel,BorderLayout.NORTH);
+		restartButton();
+		solveButton();
+		addPuzzle();
+		frame.setVisible(true);
+	}
+	
+	public void makeFrame(int width, int height) {
+		frame = new JFrame();	
 		frame.setTitle("Puzzle");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(800, 700));
 		frame.setSize(width, height);
-
-		return frame;
 	}
 	
 	
-	public static void restartButton(JPanel panel) {
-		final JButton restartButton = new JButton("Restart");
+	public void restartButton() {
+		restartButton = new JButton("Restart");
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
@@ -53,8 +67,8 @@ public class Display {
 	
 	}
 	
-	public static void solveButton(JPanel panel) {
-		final JButton solveButton = new JButton("Solve");
+	public void solveButton() {
+		solveButton = new JButton("Solve");
 		
 		class SolveListener implements ActionListener {
 			public void actionPerformed(ActionEvent event){
@@ -73,9 +87,9 @@ public class Display {
 		panel.add(solveButton,c);	
 	}
 	
-	public static void addBoard(JPanel panel) {
+	public void addBoard() {
 		
-		final JPanel board = new JPanel(new GridBagLayout()); //layout??
+		board = new JPanel(new GridBagLayout()); //layout??
 	
 		board.setBackground(Color.blue);
 		board.setVisible(true);
@@ -102,32 +116,16 @@ public class Display {
 //		
 //		}
 	
-	public static void addPuzzle(JFrame frame){
+	public void addPuzzle(){
 		
-		final PuzzlePanel puzzle = new PuzzlePanel();
+		puzzlePanel = new PuzzlePanel();
 		
-		frame.add(puzzle);
+		frame.add(puzzlePanel);
 		
 	}
 	
 	public static void main(String[] args){
-		final JFrame frame = makeFrame(600,600);
-		
-		final JPanel panel = new JPanel(new GridBagLayout());
-		
-		frame.add(panel,BorderLayout.NORTH);
-		
-	//	panel.setVisible(true);
-		restartButton(panel);
-		solveButton(panel);
-	//	addBoard(panel);
-		
-	
-		addPuzzle(frame);
-		
-		frame.setVisible(true);
-		
-		
+		Display display = new Display();
 		
 	}
 }
