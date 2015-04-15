@@ -18,75 +18,44 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 
-public class PieceComponent extends JComponent implements MouseListener, MouseMotionListener{
-
-	int HEARTS_IN = -1;
-	int HEARTS_OUT = 1;
-	int CLUBS_IN = -2;
-	int CLUBS_OUT = 2;
-	int DIAMONDS_IN = -3;
-	int DIAMONDS_OUT = 3;
-	int SPADES_IN = -4;
-	int SPADES_OUT = 4;
-	//Maybe use enums although I'm not too sure how they work.
+public class PieceComponent extends Piece implements MouseListener, MouseMotionListener{
+	
+	private BufferedImage image;
+	private int x;
+	private int y;
+	
+	public int getX() {
+		return x;
+	}
 
 
-	Piece a = new Piece(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN);
-	Piece b = new Piece(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN);
-	Piece c = new Piece(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN);
-	Piece d = new Piece(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN);
-	Piece e = new Piece(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN);
-	Piece f = new Piece(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN);
-	Piece g = new Piece(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT);
-	Piece h = new Piece(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN);
-	Piece i = new Piece(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT);
 
-	Piece [] z = {a, b, c, d, e, f, g, h, i};
+	public void setX(int x) {
+		this.x = x;
+	}
 
 
-//	private BufferedImage image;
-//	private BufferedImage image2;
-//	private BufferedImage image3;
-//	private BufferedImage image4;
-//	private BufferedImage image5;
-//	private BufferedImage image6;
-//	private BufferedImage image7;
-//	private BufferedImage image8;
-//	private BufferedImage image9;
-//
-//
-//	public PieceComponent() {
-//		addMouseListener(this);
-//		try {                
-//			image = ImageIO.read(this.getClass().getResource("piece_1.png"));
-//			image2 = ImageIO.read(this.getClass().getResource("piece_2.png"));
-//			image3 = ImageIO.read(this.getClass().getResource("piece_3.png"));
-//			image4 = ImageIO.read(this.getClass().getResource("piece_4.png"));
-//			image5 = ImageIO.read(this.getClass().getResource("piece_5.png"));
-//			image6 = ImageIO.read(this.getClass().getResource("piece_6.png"));
-//			image7 = ImageIO.read(this.getClass().getResource("piece_7.png"));
-//			image8 = ImageIO.read(this.getClass().getResource("piece_8.png"));
-//			image9 = ImageIO.read(this.getClass().getResource("piece_9.png"));
-//		} catch (IOException ex) {
-//			System.out.println("image not found");
-//		}
-//	}
 
-//	@Override
-//	protected void paintComponent(Graphics g) {
-//		super.paintComponent(g);
-//		g.drawImage(image, 0, 20, null);
-//		g.drawImage(image2, 0, 140, null);
-//		g.drawImage(image3, 0, 260, null);
-//		g.drawImage(image4, 0, 380, null);
-//		g.drawImage(image5, 0, 500, null);
-//		g.drawImage(image6, 120, 20, null);
-//		g.drawImage(image7, 120, 140, null);
-//		g.drawImage(image8, 120, 260, null);
-//		g.drawImage(image9, 120, 380, null);
-//	}
+	public int getY() {
+		return y;
+	}
 
 
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+
+
+	public PieceComponent(int north, int east, int south, int west, BufferedImage image, int x, int y){
+		super(north, east, south, west);
+		image = this.image;
+		x = this.x;
+		y = this.y;
+	}
+	
+		
 
 	public static void rotate(Piece piece, int rotations){
 		piece.rotate(rotations);
@@ -94,13 +63,11 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -214,25 +181,21 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
