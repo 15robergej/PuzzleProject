@@ -20,10 +20,50 @@ import javax.swing.JComponent;
 
 public class PieceComponent extends Piece implements MouseListener, MouseMotionListener{
 	
-	private BufferedImage image;
+	private static BufferedImage image;
 	private int x;
 	private int y;
+	private int width = image.getWidth();
+	private int height = image.getHeight();
+	private boolean dragging = false;
 	
+	
+	public static BufferedImage getImage() {
+		return image;
+	}
+
+
+
+	public static void setImage(BufferedImage image) {
+		PieceComponent.image = image;
+	}
+
+
+
+	public int getWidth() {
+		return width;
+	}
+
+
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+
+
+	public int getHeight() {
+		return height;
+	}
+
+
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+
+
 	public int getX() {
 		return x;
 	}
@@ -59,12 +99,14 @@ public class PieceComponent extends Piece implements MouseListener, MouseMotionL
 
 	public static void rotate(Piece piece, int rotations){
 		piece.rotate(rotations);
+		AffineTransform at = new AffineTransform();
+		at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
+		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+		image = op.filter(image, null);
+		image.createGraphics().drawImage(image, 0, 0, null);
 	}
 
-	@Override
-	public void mouseDragged(MouseEvent e) {
-
-	}
+	
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
@@ -73,120 +115,59 @@ public class PieceComponent extends Piece implements MouseListener, MouseMotionL
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		Point clicked = e.getPoint();
-//		Rectangle bounds1 = new Rectangle(0, 20, image.getWidth(), image.getHeight());
-//		Rectangle bounds2 = new Rectangle(0, 140, image2.getWidth(), image2.getHeight());
-//		Rectangle bounds3 = new Rectangle(0, 260, image3.getWidth(), image3.getHeight());
-//		Rectangle bounds4 = new Rectangle(0, 380, image4.getWidth(), image4.getHeight());
-//		Rectangle bounds5 = new Rectangle(0, 500, image5.getWidth(), image5.getHeight());
-//		Rectangle bounds6 = new Rectangle(120, 20, image6.getWidth(), image6.getHeight());
-//		Rectangle bounds7 = new Rectangle(120, 140, image7.getWidth(), image7.getHeight());
-//		Rectangle bounds8 = new Rectangle(120, 260, image8.getWidth(), image8.getHeight());
-//		Rectangle bounds9 = new Rectangle(120, 380, image9.getWidth(), image9.getHeight());
-//		
-//		if (bounds1.contains(clicked)) {
-//			// target image was clicked
-//			System.out.println("clicked");
-//			AffineTransform at = new AffineTransform();
-//			at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
-//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-//			image = op.filter(image, null);
-//			image.createGraphics().drawImage(image, 0, 0, null);
+		Point clicked = e.getPoint();
+		
+		Rectangle bounds = new Rectangle(x, y, width, height);
+		
+		if(bounds.contains(clicked)){
+			
 //			this.repaint();
-//		}
-//		
-//		else if (bounds2.contains(clicked)) {
-//			// target image was clicked
-//			System.out.println("clicked");
-//			AffineTransform at = new AffineTransform();
-//			at.rotate(Math.PI/2, image2.getWidth() / 2, image2.getHeight() / 2);
-//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-//			image2 = op.filter(image2, null);
-//			image2.createGraphics().drawImage(image2, 0, 0, null);
-//			this.repaint();
-//		}
-//		else if (bounds3.contains(clicked)) {
-//			// target image was clicked
-//			System.out.println("clicked");
-//			AffineTransform at = new AffineTransform();
-//			at.rotate(Math.PI/2, image3.getWidth() / 2, image3.getHeight() / 2);
-//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-//			image3 = op.filter(image3, null);
-//			image3.createGraphics().drawImage(image3, 0, 0, null);
-//			this.repaint();
-//		}		
-//		else if (bounds4.contains(clicked)) {
-//			// target image was clicked
-//			System.out.println("clicked");
-//			AffineTransform at = new AffineTransform();
-//			at.rotate(Math.PI/2, image4.getWidth() / 2, image4.getHeight() / 2);
-//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-//			image4 = op.filter(image4, null);
-//			image4.createGraphics().drawImage(image4, 0, 0, null);
-//			this.repaint();
-//		}		
-//		else if (bounds5.contains(clicked)) {
-//			// target image was clicked
-//			System.out.println("clicked");
-//			AffineTransform at = new AffineTransform();
-//			at.rotate(Math.PI/2, image5.getWidth() / 2, image5.getHeight() / 2);
-//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-//			image5 = op.filter(image5, null);
-//			image5.createGraphics().drawImage(image5, 0, 0, null);
-//			this.repaint();
-//		}		
-//		else if (bounds6.contains(clicked)) {
-//			// target image was clicked
-//			System.out.println("clicked");
-//			AffineTransform at = new AffineTransform();
-//			at.rotate(Math.PI/2, image6.getWidth() / 2, image6.getHeight() / 2);
-//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-//			image6 = op.filter(image6, null);
-//			image6.createGraphics().drawImage(image6, 0, 0, null);
-//			this.repaint();
-//		}		
-//		else if (bounds7.contains(clicked)) {
-//			// target image was clicked
-//			System.out.println("clicked");
-//			AffineTransform at = new AffineTransform();
-//			at.rotate(Math.PI/2, image7.getWidth() / 2, image7.getHeight() / 2);
-//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-//			image7 = op.filter(image7, null);
-//			image7.createGraphics().drawImage(image7, 0, 0, null);
-//			this.repaint();
-//		}		
-//		else if (bounds8.contains(clicked)) {
-//			// target image was clicked
-//			System.out.println("clicked");
-//			AffineTransform at = new AffineTransform();
-//			at.rotate(Math.PI/2, image8.getWidth() / 2, image8.getHeight() / 2);
-//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-//			image8 = op.filter(image8, null);
-//			image8.createGraphics().drawImage(image8, 0, 0, null);
-//			this.repaint();
-//		}		
-//		else if (bounds9.contains(clicked)) {
-//			// target image was clicked
-//			System.out.println("clicked");
-//			AffineTransform at = new AffineTransform();
-//			at.rotate(Math.PI/2, image9.getWidth() / 2, image9.getHeight() / 2);
-//			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-//			image9 = op.filter(image9, null);
-//			image9.createGraphics().drawImage(image9, 0, 0, null);
-//			this.repaint();
-//		}
+		}
+
 
 	}
 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
+		Point pressed = e.getPoint();
+		
+		Rectangle bounds = new Rectangle(x, y, width, height);
+		
+		if (bounds.contains(pressed)){
+			dragging = true;
+		}
 	}
 
 	@Override
+	public void mouseDragged(MouseEvent e) {
+		Point drag = e.getPoint();
+		if(dragging){
+			x = drag.x;
+			y = drag.y;
+		}
+	}
+	
+	@Override
 	public void mouseReleased(MouseEvent e) {
-
+		Point released = e.getPoint();
+		dragging = false;
+//		Rectangle g1 = new Rectangle(426, 126, 70, 70);
+//		Rectangle g2 = new Rectangle(426, 196, 70, 70);
+//		Rectangle g3 = new Rectangle(426, 266, 70, 70);
+//		Rectangle g4 = new Rectangle(496, 126, 70, 70);
+//		Rectangle g5 = new Rectangle(496, 196, 70, 70);
+//		Rectangle g6 = new Rectangle(496, 266, 70, 70);
+//		Rectangle g7 = new Rectangle(566, 126, 70, 70);
+//		Rectangle g8 = new Rectangle(566, 196, 70, 70);
+//		Rectangle g9 = new Rectangle(566, 266, 70, 70);
+		
+		
+//		if (g1.contains(released)&&movep1) {
+//			x1=426;
+//			y1=126;
+//			System.out.println("in grid spot 1-- (0,0)");
+//		}
 	}
 
 	@Override
