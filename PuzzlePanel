@@ -33,6 +33,8 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	int x9=120, y9=380;
 	
 	
+	
+	
 	boolean dragging = false;
 	//boolean for whether or not a piece is being moved/dragged
 		boolean movep1;
@@ -77,7 +79,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	}
 
 
-	private BufferedImage image;
+	private BufferedImage image1;
 	private BufferedImage image2;
 	private BufferedImage image3;
 	private BufferedImage image4;
@@ -88,7 +90,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	private BufferedImage image9;
 	
 
-	//	PieceComponent p1= new PieceComponent(image,a);
+	//	PieceComponent p1= new PieceComponent(image1,a);
 	//	PieceComponent p2= new PieceComponent(image2,b);
 	//	PieceComponent p3= new PieceComponent(image3,c);
 	//	PieceComponent p4= new PieceComponent(image4,d);
@@ -102,7 +104,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		try {                
-			image = ImageIO.read(this.getClass().getResource("piece_1.png"));
+			image1 = ImageIO.read(this.getClass().getResource("piece_1.png"));
 			image2 = ImageIO.read(this.getClass().getResource("piece_2.png"));
 			image3 = ImageIO.read(this.getClass().getResource("piece_3.png"));
 			image4 = ImageIO.read(this.getClass().getResource("piece_4.png"));
@@ -118,7 +120,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(image, x1, y1, null);
+		g.drawImage(image1, x1, y1, null);
 		g.drawImage(image2, x2, y2, null);
 		g.drawImage(image3, x3, y3, null);
 		g.drawImage(image4, x4, y4, null);
@@ -150,7 +152,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public void mouseClicked(MouseEvent e) {
 		Point clicked = e.getPoint();
 		
-		Rectangle pbounds1 = new Rectangle(x1, y1, image.getWidth(), image.getHeight());
+		Rectangle pbounds1 = new Rectangle(x1, y1, image1.getWidth(), image1.getHeight());
 		Rectangle pbounds2 = new Rectangle(x2, y2, image2.getWidth(), image2.getHeight());
 		Rectangle pbounds3 = new Rectangle(x3, y3, image3.getWidth(), image3.getHeight());
 		Rectangle pbounds4 = new Rectangle(x4, y4, image4.getWidth(), image4.getHeight());
@@ -164,10 +166,10 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 			// target image was clicked
 			System.out.println("clicked");
 			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
+			at.rotate(Math.PI/2, image1.getWidth() / 2, image1.getHeight() / 2);
 			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image = op.filter(image, null);
-			image.createGraphics().drawImage(image, 0, 0, null);
+			image1 = op.filter(image1, null);
+			image1.createGraphics().drawImage(image1, 0, 0, null);
 			this.repaint();
 			p1.rotate();
 			//		PieceComponent.rotate(p1);
@@ -269,7 +271,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public void mousePressed(MouseEvent e) {
 		Point pressed = e.getPoint();
 
-		Rectangle pbounds1 = new Rectangle(x1, y1, image.getWidth(), image.getHeight());
+		Rectangle pbounds1 = new Rectangle(x1, y1, image1.getWidth(), image1.getHeight());
 		Rectangle pbounds2 = new Rectangle(x2, y2, image2.getWidth(), image2.getHeight());
 		Rectangle pbounds3 = new Rectangle(x3, y3, image3.getWidth(), image3.getHeight());
 		Rectangle pbounds4 = new Rectangle(x4, y4, image4.getWidth(), image4.getHeight());
