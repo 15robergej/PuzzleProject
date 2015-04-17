@@ -26,6 +26,7 @@ public class PieceComponent extends Piece implements MouseListener, MouseMotionL
 	private int width = image.getWidth();
 	private int height = image.getHeight();
 	private boolean dragging = false;
+	private static Piece piece;
 	
 	
 	public static BufferedImage getImage() {
@@ -90,14 +91,14 @@ public class PieceComponent extends Piece implements MouseListener, MouseMotionL
 
 	public PieceComponent(int north, int east, int south, int west, BufferedImage image, int x, int y){
 		super(north, east, south, west);
-		image = this.image;
-		x = this.x;
-		y = this.y;
+		this.image = image;
+		this.x = x;
+		this.y = y;
 	}
 	
 		
 
-	public static void rotate(Piece piece, int rotations){
+	public static void rotate(int rotations){
 		piece.rotate(rotations);
 		AffineTransform at = new AffineTransform();
 		at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
