@@ -78,41 +78,24 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		p.solve();
 	}
 
-
-	private BufferedImage image1;
-	private BufferedImage image2;
-	private BufferedImage image3;
-	private BufferedImage image4;
-	private BufferedImage image5;
-	private BufferedImage image6;
-	private BufferedImage image7;
-	private BufferedImage image8;
-	private BufferedImage image9;
-	
-
-	//	PieceComponent p1= new PieceComponent(image1,a);
-	//	PieceComponent p2= new PieceComponent(image2,b);
-	//	PieceComponent p3= new PieceComponent(image3,c);
-	//	PieceComponent p4= new PieceComponent(image4,d);
-	//	PieceComponent p5= new PieceComponent(image5,e);
-	//	PieceComponent p6= new PieceComponent(image6,f);
-	//	PieceComponent p7= new PieceComponent(image7,g);
-	//	PieceComponent p8= new PieceComponent(image8,h);
-	//	PieceComponent p9= new PieceComponent(image9,i);
+	private BufferedImage[] images;
 
 	public PuzzlePanel() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		try {                
-			image1 = ImageIO.read(this.getClass().getResource("piece_1.png"));
-			image2 = ImageIO.read(this.getClass().getResource("piece_2.png"));
-			image3 = ImageIO.read(this.getClass().getResource("piece_3.png"));
-			image4 = ImageIO.read(this.getClass().getResource("piece_4.png"));
-			image5 = ImageIO.read(this.getClass().getResource("piece_5.png"));
-			image6 = ImageIO.read(this.getClass().getResource("piece_6.png"));
-			image7 = ImageIO.read(this.getClass().getResource("piece_7.png"));
-			image8 = ImageIO.read(this.getClass().getResource("piece_8.png"));
-			image9 = ImageIO.read(this.getClass().getResource("piece_9.png"));
+		try {          
+			for(int i = 0; i < 9; i++){
+				images[i] = ImageIO.read(this.getClass().getResource("piece_" + i + ".png"));
+			}
+//			image1 = ImageIO.read(this.getClass().getResource("piece_1.png"));
+//			image2 = ImageIO.read(this.getClass().getResource("piece_2.png"));
+//			image3 = ImageIO.read(this.getClass().getResource("piece_3.png"));
+//			image4 = ImageIO.read(this.getClass().getResource("piece_4.png"));
+//			image5 = ImageIO.read(this.getClass().getResource("piece_5.png"));
+//			image6 = ImageIO.read(this.getClass().getResource("piece_6.png"));
+//			image7 = ImageIO.read(this.getClass().getResource("piece_7.png"));
+//			image8 = ImageIO.read(this.getClass().getResource("piece_8.png"));
+//			image9 = ImageIO.read(this.getClass().getResource("piece_9.png"));
 		} catch (IOException ex) {
 			System.out.println("image not found");
 		}
