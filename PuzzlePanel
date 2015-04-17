@@ -15,25 +15,22 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionListener{
-
+	
+	int HEARTS_IN = -1;
+	int HEARTS_OUT = 1;
+	int CLUBS_IN = -2;
+	int CLUBS_OUT = 2;
+	int DIAMONDS_IN = -3;
+	int DIAMONDS_OUT = 3;
+	int SPADES_IN = -4;
+	int SPADES_OUT = 4;
+	
 //	int sX, sY;
 //	int curX, curY;
 //	int w = curX - sX, h = curY - sY;
 	
 	
-	//storing coordinates of upper left corner of each piece
-	int x1=0, y1=0;
-	int x2=0, y2=120;
-	int x3=0, y3=240;
-	int x4=0, y4=360;
-	int x5=0, y5=480;
-	int x6=120, y6=20;
-	int x7=120, y7=140;
-	int x8=120, y8=260;
-	int x9=120, y9=380;
-	
-	
-	
+
 	
 	boolean dragging = false;
 	//boolean for whether or not a piece is being moved/dragged
@@ -47,25 +44,9 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		boolean movep8;
 		boolean movep9;
 
-	int HEARTS_IN = -1;
-	int HEARTS_OUT = 1;
-	int CLUBS_IN = -2;
-	int CLUBS_OUT = 2;
-	int DIAMONDS_IN = -3;
-	int DIAMONDS_OUT = 3;
-	int SPADES_IN = -4;
-	int SPADES_OUT = 4;
+
 	//Maybe use enums although I'm not too sure how they work.
 
-	Piece p1 = new Piece(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN);
-	Piece p2 = new Piece(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN);
-	Piece p3 = new Piece(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN);
-	Piece p4 = new Piece(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN);
-	Piece p5 = new Piece(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN);
-	Piece p6 = new Piece(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN);
-	Piece p7 = new Piece(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT);
-	Piece p8 = new Piece(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN);
-	Piece p9 = new Piece(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT);
 
 	//	Piece [] z = {a, b, c, d, e, f, g, h, i};
 
@@ -77,6 +58,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public static void solve(){
 		p.solve();
 	}
+
 
 	private BufferedImage[] images;
 
@@ -101,17 +83,30 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		}
 	}
 
+
+	
+	PieceComponent p1 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
+	PieceComponent p2 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
+	PieceComponent p3 = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
+	PieceComponent p4 = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, images[3], 0, 360);
+	PieceComponent p5 = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, images[4], 0, 480);
+	PieceComponent p6 = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, images[5], 120, 20);
+	PieceComponent p7 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
+	PieceComponent p8 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
+	PieceComponent p9 = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
+
+
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(image1, x1, y1, null);
-		g.drawImage(image2, x2, y2, null);
-		g.drawImage(image3, x3, y3, null);
-		g.drawImage(image4, x4, y4, null);
-		g.drawImage(image5, x5, y5, null);
-		g.drawImage(image6, x6, y6, null);
-		g.drawImage(image7, x7, y7, null);
-		g.drawImage(image8, x8, y8, null);
-		g.drawImage(image9, x9, y9, null);
+		g.drawImage(image, p1.getX(), p1.getY(), null);
+		g.drawImage(image2, p2.getX(), p2.getY(), null);
+		g.drawImage(image3, p3.getX(), p3.getY(), null);
+		g.drawImage(image4, p4.getX(), p4.getY(), null);
+		g.drawImage(image5, p5.getX(), p5.getY(), null);
+		g.drawImage(image6, p6.getX(), p6.getY(), null);
+		g.drawImage(image7, p7.getX(), p7.getY(), null);
+		g.drawImage(image8, p8.getX(), p8.getY(), null);
+		g.drawImage(image9, p9.getX(), p9.getY(), null);
 
 		Graphics2D g2 = (Graphics2D) g;
 		//MAKES THE GRID 100 by 100 px.
@@ -135,7 +130,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public void mouseClicked(MouseEvent e) {
 		Point clicked = e.getPoint();
 		
-		Rectangle pbounds1 = new Rectangle(x1, y1, image1.getWidth(), image1.getHeight());
+		Rectangle pbounds1 = new Rectangle(x1, y1, image.getWidth(), image.getHeight());
 		Rectangle pbounds2 = new Rectangle(x2, y2, image2.getWidth(), image2.getHeight());
 		Rectangle pbounds3 = new Rectangle(x3, y3, image3.getWidth(), image3.getHeight());
 		Rectangle pbounds4 = new Rectangle(x4, y4, image4.getWidth(), image4.getHeight());
@@ -149,10 +144,10 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 			// target image was clicked
 			System.out.println("clicked");
 			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image1.getWidth() / 2, image1.getHeight() / 2);
+			at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
 			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image1 = op.filter(image1, null);
-			image1.createGraphics().drawImage(image1, 0, 0, null);
+			image = op.filter(image, null);
+			image.createGraphics().drawImage(image, 0, 0, null);
 			this.repaint();
 			p1.rotate();
 			//		PieceComponent.rotate(p1);
@@ -254,7 +249,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public void mousePressed(MouseEvent e) {
 		Point pressed = e.getPoint();
 
-		Rectangle pbounds1 = new Rectangle(x1, y1, image1.getWidth(), image1.getHeight());
+		Rectangle pbounds1 = new Rectangle(x1, y1, image.getWidth(), image.getHeight());
 		Rectangle pbounds2 = new Rectangle(x2, y2, image2.getWidth(), image2.getHeight());
 		Rectangle pbounds3 = new Rectangle(x3, y3, image3.getWidth(), image3.getHeight());
 		Rectangle pbounds4 = new Rectangle(x4, y4, image4.getWidth(), image4.getHeight());
