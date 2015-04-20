@@ -16,6 +16,27 @@ import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionListener{
 	
+	
+	//storing coordinates of upper left corner of each piece
+//	int x1=0, y1=0;
+//	int x2=0, y2=120;
+//	int x3=0, y3=240;
+//	int x4=0, y4=360;
+//	int x5=0, y5=480;
+//	int x6=120, y6=20;
+//	int x7=120, y7=140;
+//	int x8=120, y8=260;
+//	int x9=120, y9=380;
+//	
+//	
+//	
+	
+	boolean dragging = false;
+	//boolean for whether or not a piece is being moved/dragged
+	
+	boolean [] moveP = {false, false, false, false, false, false, false, false, false};
+	
+
 	int HEARTS_IN = -1;
 	int HEARTS_OUT = 1;
 	int CLUBS_IN = -2;
@@ -24,32 +45,8 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	int DIAMONDS_OUT = 3;
 	int SPADES_IN = -4;
 	int SPADES_OUT = 4;
-	
-//	int sX, sY;
-//	int curX, curY;
-//	int w = curX - sX, h = curY - sY;
-	
-	
-
-	
-	boolean dragging = false;
-	//boolean for whether or not a piece is being moved/dragged
-		boolean movep1;
-		boolean movep2;
-		boolean movep3;
-		boolean movep4;
-		boolean movep5;
-		boolean movep6;
-		boolean movep7;
-		boolean movep8;
-		boolean movep9;
-
-
 	//Maybe use enums although I'm not too sure how they work.
-
-
-	//	Piece [] z = {a, b, c, d, e, f, g, h, i};
-
+	
 	static Puzzle p = new Puzzle(3, 3);
 
 	public static void restart(){
@@ -58,8 +55,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public static void solve(){
 		p.solve();
 	}
-
-
+	
 	private BufferedImage[] images;
 
 	public PuzzlePanel() {
@@ -69,22 +65,11 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 			for(int i = 0; i < 9; i++){
 				images[i] = ImageIO.read(this.getClass().getResource("piece_" + i + ".png"));
 			}
-//			image1 = ImageIO.read(this.getClass().getResource("piece_1.png"));
-//			image2 = ImageIO.read(this.getClass().getResource("piece_2.png"));
-//			image3 = ImageIO.read(this.getClass().getResource("piece_3.png"));
-//			image4 = ImageIO.read(this.getClass().getResource("piece_4.png"));
-//			image5 = ImageIO.read(this.getClass().getResource("piece_5.png"));
-//			image6 = ImageIO.read(this.getClass().getResource("piece_6.png"));
-//			image7 = ImageIO.read(this.getClass().getResource("piece_7.png"));
-//			image8 = ImageIO.read(this.getClass().getResource("piece_8.png"));
-//			image9 = ImageIO.read(this.getClass().getResource("piece_9.png"));
 		} catch (IOException ex) {
 			System.out.println("image not found");
 		}
 	}
 
-
-	
 	PieceComponent p1 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
 	PieceComponent p2 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
 	PieceComponent p3 = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
@@ -94,20 +79,18 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	PieceComponent p7 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
 	PieceComponent p8 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
 	PieceComponent p9 = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
-
-
+	
+	PieceComponent [] pieces = {p1,p2,p3,p4,p5,p6,p7,p8,p8};
+	
+	private Rectangle [] bounds;
+	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(image, p1.getX(), p1.getY(), null);
-		g.drawImage(image2, p2.getX(), p2.getY(), null);
-		g.drawImage(image3, p3.getX(), p3.getY(), null);
-		g.drawImage(image4, p4.getX(), p4.getY(), null);
-		g.drawImage(image5, p5.getX(), p5.getY(), null);
-		g.drawImage(image6, p6.getX(), p6.getY(), null);
-		g.drawImage(image7, p7.getX(), p7.getY(), null);
-		g.drawImage(image8, p8.getX(), p8.getY(), null);
-		g.drawImage(image9, p9.getX(), p9.getY(), null);
+		for(int i = 0; i < 9; i++){
+			g.drawImage(images[i], pieces[i].getX(), pieces[i].getY(), null );
+		}
 
+		
 		Graphics2D g2 = (Graphics2D) g;
 		//MAKES THE GRID 100 by 100 px.
 		for (int y = 150; y <= 360; y += 70){
@@ -130,118 +113,15 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public void mouseClicked(MouseEvent e) {
 		Point clicked = e.getPoint();
 		
-		Rectangle pbounds1 = new Rectangle(x1, y1, image.getWidth(), image.getHeight());
-		Rectangle pbounds2 = new Rectangle(x2, y2, image2.getWidth(), image2.getHeight());
-		Rectangle pbounds3 = new Rectangle(x3, y3, image3.getWidth(), image3.getHeight());
-		Rectangle pbounds4 = new Rectangle(x4, y4, image4.getWidth(), image4.getHeight());
-		Rectangle pbounds5 = new Rectangle(x5, y5, image5.getWidth(), image5.getHeight());
-		Rectangle pbounds6 = new Rectangle(x6, y6, image6.getWidth(), image6.getHeight());
-		Rectangle pbounds7 = new Rectangle(x7, y7, image7.getWidth(), image7.getHeight());
-		Rectangle pbounds8 = new Rectangle(x8, y8, image8.getWidth(), image8.getHeight());
-		Rectangle pbounds9 = new Rectangle(x9, y9, image9.getWidth(), image9.getHeight());
-
-		if (pbounds1.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image = op.filter(image, null);
-			image.createGraphics().drawImage(image, 0, 0, null);
-			this.repaint();
-			p1.rotate();
-			//		PieceComponent.rotate(p1);
-			System.out.println("piece1 rotated");
+		for(int i = 0; i < 9; i++){
+			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
 		}
 
-		else if (pbounds2.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image2.getWidth() / 2, image2.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image2 = op.filter(image2, null);
-			image2.createGraphics().drawImage(image2, 0, 0, null);
-			this.repaint();
-			p2.rotate();
+		for(int i = 0; i < 9; i++){
+			if(bounds[i].contains(clicked))
+				pieces[i].rotate();
 		}
-		else if (pbounds3.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image3.getWidth() / 2, image3.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image3 = op.filter(image3, null);
-			image3.createGraphics().drawImage(image3, 0, 0, null);
-			this.repaint();
-			p3.rotate();
-		}		
-		else if (pbounds4.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image4.getWidth() / 2, image4.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image4 = op.filter(image4, null);
-			image4.createGraphics().drawImage(image4, 0, 0, null);
-			this.repaint();
-			p4.rotate();
-		}		
-		else if (pbounds5.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image5.getWidth() / 2, image5.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image5 = op.filter(image5, null);
-			image5.createGraphics().drawImage(image5, 0, 0, null);
-			this.repaint();
-			p5.rotate();
-		}		
-		else if (pbounds6.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image6.getWidth() / 2, image6.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image6 = op.filter(image6, null);
-			image6.createGraphics().drawImage(image6, 0, 0, null);
-			this.repaint();
-			p6.rotate();
-		}		
-		else if (pbounds7.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image7.getWidth() / 2, image7.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image7 = op.filter(image7, null);
-			image7.createGraphics().drawImage(image7, 0, 0, null);
-			this.repaint();
-			p7.rotate();
-		}		
-		else if (pbounds8.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image8.getWidth() / 2, image8.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image8 = op.filter(image8, null);
-			image8.createGraphics().drawImage(image8, 0, 0, null);
-			this.repaint();
-			p8.rotate();
-		}		
-		else if (pbounds9.contains(clicked)) {
-			// target image was clicked
-			System.out.println("clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, image9.getWidth() / 2, image9.getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			image9 = op.filter(image9, null);
-			image9.createGraphics().drawImage(image9, 0, 0, null);
-			this.repaint();
-			p9.rotate();
-		}
+		
 	}
 
 
@@ -249,56 +129,19 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public void mousePressed(MouseEvent e) {
 		Point pressed = e.getPoint();
 
-		Rectangle pbounds1 = new Rectangle(x1, y1, image.getWidth(), image.getHeight());
-		Rectangle pbounds2 = new Rectangle(x2, y2, image2.getWidth(), image2.getHeight());
-		Rectangle pbounds3 = new Rectangle(x3, y3, image3.getWidth(), image3.getHeight());
-		Rectangle pbounds4 = new Rectangle(x4, y4, image4.getWidth(), image4.getHeight());
-		Rectangle pbounds5 = new Rectangle(x5, y5, image5.getWidth(), image5.getHeight());
-		Rectangle pbounds6 = new Rectangle(x6, y6, image6.getWidth(), image6.getHeight());
-		Rectangle pbounds7 = new Rectangle(x7, y7, image7.getWidth(), image7.getHeight());
-		Rectangle pbounds8 = new Rectangle(x8, y8, image8.getWidth(), image8.getHeight());
-		Rectangle pbounds9 = new Rectangle(x9, y9, image9.getWidth(), image9.getHeight());
+		for(int i = 0; i < 9; i++){
+			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
+		}
+		
+		for(int i = 0; i < 0; i++){
+			if(bounds[i].contains(pressed)){
+				dragging = true;
+				moveP[i] = true;
+			}
+		}
 		
 		System.out.println("mousePressed at " + pressed);
 
-		if (pbounds1.contains(pressed)){
-			dragging = true;
-			movep1=true;
-//			sX = pressed.x;
-//			sY = pressed.y;
-		}
-		else if (pbounds2.contains(pressed)){
-			dragging = true;
-			movep2=true;
-		}
-		else if (pbounds3.contains(pressed)){
-			dragging = true;
-			movep3=true;
-		}
-		else if (pbounds4.contains(pressed)){
-			dragging = true;
-			movep4=true;
-		}
-		else if (pbounds5.contains(pressed)){
-			dragging = true;
-			movep5=true;
-		}
-		else if (pbounds6.contains(pressed)){
-			dragging = true;
-			movep6=true;
-		}
-		else if (pbounds7.contains(pressed)){
-			dragging = true;
-			movep7=true;
-		}
-		else if (pbounds8.contains(pressed)){
-			dragging = true;
-			movep8=true;
-		}
-		else if (pbounds9.contains(pressed)){
-			dragging = true;
-			movep9=true;
-		}
 	}
 
 	@Override
@@ -308,44 +151,12 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		if (dragging) {
 //			curX = drag.x;
 //			curY = drag.y;
-			if (movep1){
-				x1 = drag.x;
-				y1 = drag.y;
+			for(int i = 0; i < 0; i ++){
+				if(moveP[i]){
+					pieces[i].setX(drag.x);
+					pieces[i].setY(drag.y);
+				}
 			}
-			else if (movep2){
-				x2 = drag.x;
-				y2 = drag.y;
-			}
-			else if (movep3){
-				x3 = drag.x;
-				y3 = drag.y;
-			}
-			else if (movep4){
-				x4 = drag.x;
-				y4 = drag.y;
-			}
-			else if (movep5){
-				x5 = drag.x;
-				y5 = drag.y;
-			}
-			else if (movep6){
-				x6 = drag.x;
-				y6 = drag.y;
-			}
-			else if (movep7){
-				x7 = drag.x;
-				y7 = drag.y;
-			}
-			else if (movep8){
-				x8 = drag.x;
-				y8 = drag.y;
-			}
-			else if (movep9){
-				x9 = drag.x;
-				y9 = drag.y;
-			}
-			//	image.createGraphics().drawImage(image, curX-sX, curY-sY, null);
-			//	this.repaint();
 			repaint();
 		}
 	}
