@@ -179,32 +179,35 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		Rectangle g7 = new Rectangle(566, 126, 70, 70);
 		Rectangle g8 = new Rectangle(566, 196, 70, 70);
 		Rectangle g9 = new Rectangle(566, 266, 70, 70);
-
-		if (g1.contains(released)&&movep1) {
-			x1=426;
-			y1=126;
-			System.out.println("in grid spot 1-- (0,0)");
+		
+		Rectangle[] grid = {g1, g2, g3, g4, g5, g6, g7, g8, g9};
+		
+		for(int i = 0; i < 9; i ++){
+			if(grid[i].contains(released) && moveP[i]){
+				pieces[i].setX((int)grid[i].getX());
+				pieces[i].setY((int)grid[i].getY());
+			}
 		}
-		else if (g2.contains(released)&&movep1) {
-			x1=426;
-			y1=196;
-			//System.out.println("in grid spot 2-- (0,1)");
-		}
+//
+//		if (g1.contains(released)&&movep1) {
+//			x1=426;
+//			y1=126;
+//			System.out.println("in grid spot 1-- (0,0)");
+//		}
+//		else if (g2.contains(released)&&movep1) {
+//			x1=426;
+//			y1=196;
+//			//System.out.println("in grid spot 2-- (0,1)");
+//		}
 //		else{
 //			//move back to default spot???????
 //			
 //		}
 		repaint();
 
-		movep1=false;
-		movep2=false;
-		movep3=false;
-		movep4=false;
-		movep5=false;
-		movep6=false;
-		movep7=false;
-		movep8=false;
-		movep9=false;
+		for(int i = 0; i < 9; i++){
+			moveP[i] = false;
+		}
 
 
 		//		
