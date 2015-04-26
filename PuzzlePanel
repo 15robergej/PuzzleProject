@@ -211,18 +211,32 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {
-		Point drag = e.getPoint();
+	public void mousePressed(MouseEvent e) {
+		Point pressed = e.getPoint();
 
-		if (dragging) {
-			for(int i = 0; i < 0; i ++){
-				if(moveP[i]){
-					pieces[i].setX(drag.x);
-					pieces[i].setY(drag.y);
-				}
-			}
-			repaint();
-		}
+//		for(int i = 0; i < 9; i++){
+		Rectangle bounds1 = new Rectangle(p1.getX(), p1.getY(), image.getWidth(), image.getHeight());
+		Rectangle bounds2 = new Rectangle(p2.getX(), p2.getY(), image2.getWidth(), image2.getHeight());
+		Rectangle pbounds3 = new Rectangle(p3.getX(), p3.getY(), image3.getWidth(), image3.getHeight());
+		Rectangle pbounds4 = new Rectangle(p4.getX(), p4.getY(), image4.getWidth(), image4.getHeight());
+		Rectangle pbounds5 = new Rectangle(p5.getX(), p5.getY(), image5.getWidth(), image5.getHeight());
+		Rectangle pbounds6 = new Rectangle(p6.getX(), p6.getY(), image6.getWidth(), image6.getHeight());
+		Rectangle pbounds7 = new Rectangle(p7.getX(), p7.getY(), image7.getWidth(), image7.getHeight());
+		Rectangle pbounds8 = new Rectangle(p8.getX(), p8.getY(), image8.getWidth(), image8.getHeight());
+		Rectangle pbounds9 = new Rectangle(p9.getX(), p9.getY(), image9.getWidth(), image9.getHeight());
+		
+//			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
+//		}
+//		
+//		for(int i = 0; i < 0; i++){
+//			if(bounds[i].contains(pressed)){
+//				dragging = true;
+//				moveP[i] = true;
+//			}
+//		}
+//		
+		System.out.println("mousePressed at " + pressed);
+
 	}
 
 	@Override
