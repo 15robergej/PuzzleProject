@@ -28,14 +28,11 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 //	int x8=120, y8=260;
 //	int x9=120, y9=380;
 //	
-//	
-//	
 	
 	boolean dragging = false;
 	//boolean for whether or not a piece is being moved/dragged
 	
 	boolean [] moveP = {false, false, false, false, false, false, false, false, false};
-	
 
 	int HEARTS_IN = -1;
 	int HEARTS_OUT = 1;
@@ -50,47 +47,116 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	static Puzzle p = new Puzzle(3, 3);
 
 	public static void restart(){
+		
 		p.restart();
 	}
 	public static void solve(){
+		
 		p.solve();
 	}
 	
-	private BufferedImage[] images;
-
+//	private BufferedImage[] images;
+	
+	private BufferedImage image;
+	private BufferedImage image2;
+	private BufferedImage image3;
+	private BufferedImage image4;
+	private BufferedImage image5;
+	private BufferedImage image6;
+	private BufferedImage image7;
+	private BufferedImage image8;
+	private BufferedImage image9;
+	
 	public PuzzlePanel() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		try {          
-			for(int i = 0; i < 9; i++){
-				images[i] = ImageIO.read(this.getClass().getResource("piece_" + i + ".png"));
-			}
+		try {                 
+			image = ImageIO.read(this.getClass().getResource("piece_1.png"));
+			image2 = ImageIO.read(this.getClass().getResource("piece_2.png"));
+			image3 = ImageIO.read(this.getClass().getResource("piece_3.png"));
+			image4 = ImageIO.read(this.getClass().getResource("piece_4.png"));
+			image5 = ImageIO.read(this.getClass().getResource("piece_5.png"));
+			image6 = ImageIO.read(this.getClass().getResource("piece_6.png"));
+			image7 = ImageIO.read(this.getClass().getResource("piece_7.png"));
+			image8 = ImageIO.read(this.getClass().getResource("piece_8.png"));
+			image9 = ImageIO.read(this.getClass().getResource("piece_9.png"));
+//				images[0] = ImageIO.read(this.getClass().getResource("piece_1.png"));
+//				images[1] = ImageIO.read(this.getClass().getResource("piece_2.png"));
+//				images[2] = ImageIO.read(this.getClass().getResource("piece_3.png"));
+//				images[3] = ImageIO.read(this.getClass().getResource("piece_4.png"));
+//				images[4] = ImageIO.read(this.getClass().getResource("piece_5.png"));
+//				images[5] = ImageIO.read(this.getClass().getResource("piece_6.png"));
+//				images[6] = ImageIO.read(this.getClass().getResource("piece_7.png"));
+//				images[7] = ImageIO.read(this.getClass().getResource("piece_8.png"));
+//				images[8] = ImageIO.read(this.getClass().getResource("piece_9.png"));
+//			for(int i = 0; i < 9; i++){
+//				images[i] = ImageIO.read(this.getClass().getResource("piece_" + i+1 + ".png"));
+//			}
 		} catch (IOException ex) {
 			System.out.println("image not found");
 		}
 	}
+	
+//	private BufferedImage[] images= {image,image2,image3,image4,image5,image6,image7,image8,image9};
 
-	PieceComponent p1 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
-	PieceComponent p2 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
-	PieceComponent p3 = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
-	PieceComponent p4 = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, images[3], 0, 360);
-	PieceComponent p5 = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, images[4], 0, 480);
-	PieceComponent p6 = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, images[5], 120, 20);
-	PieceComponent p7 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
-	PieceComponent p8 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
-	PieceComponent p9 = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
+	PieceComponent p1 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, image, 0, 0);
+	PieceComponent p2 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, image2, 0, 120);
+	PieceComponent p3 = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, image3, 0, 240);
+	PieceComponent p4 = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, image4, 0, 360);
+	PieceComponent p5 = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, image5, 0, 480);
+	PieceComponent p6 = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, image6, 120, 20);
+	PieceComponent p7 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, image7, 120, 140);
+	PieceComponent p8 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, image8, 120, 260);
+	PieceComponent p9 = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, image9, 120, 380);
 	
-	PieceComponent [] pieces = {p1,p2,p3,p4,p5,p6,p7,p8,p8};
+//	PieceComponent p1 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
+//	PieceComponent p2 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
+//	PieceComponent p3 = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
+//	PieceComponent p4 = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, images[3], 0, 360);
+//	PieceComponent p5 = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, images[4], 0, 480);
+//	PieceComponent p6 = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, images[5], 120, 20);
+//	PieceComponent p7 = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
+//	PieceComponent p8 = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
+//	PieceComponent p9 = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
 	
-	private Rectangle [] bounds;
+	PieceComponent[] pieces = {p1,p2,p3,p4,p5,p6,p7,p8,p9};
+	
+//	Rectangle b1 = new Rectangle(p1.getX(), p1.getY(), image.getWidth(), image.getHeight());
+//	Rectangle b2 = new Rectangle(x2, y2, image2.getWidth(), image2.getHeight());
+//	Rectangle b3 = new Rectangle(x3, y3, image3.getWidth(), image3.getHeight());
+//	Rectangle b4 = new Rectangle(x4, y4, image4.getWidth(), image4.getHeight());
+//	Rectangle b5 = new Rectangle(x5, y5, image5.getWidth(), image5.getHeight());
+//	Rectangle b6 = new Rectangle(x6, y6, image6.getWidth(), image6.getHeight());
+//	Rectangle b7 = new Rectangle(x7, y7, image7.getWidth(), image7.getHeight());
+//	Rectangle b8 = new Rectangle(x8, y8, image8.getWidth(), image8.getHeight());
+//	Rectangle b9 = new Rectangle(x9, y9, image9.getWidth(), image9.getHeight());
+//	
+//	private Rectangle[] bounds = {b1,b2,b3,b4,b5,b6,b7,b8,b9};
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		for(int i = 0; i < 9; i++){
-			g.drawImage(images[i], pieces[i].getX(), pieces[i].getY(), null );
-		}
+//		for(int i = 0; i < 9; i++){
+//			g.drawImage(images[i], pieces[i].getX(), pieces[i].getY(), null );
+//		}
+		g.drawImage(image, pieces[0].getX(), pieces[0].getY(), null);
+		g.drawImage(image2, pieces[1].getX(), pieces[1].getY(), null);
+		g.drawImage(image3, pieces[2].getX(), pieces[2].getY(), null);
+		g.drawImage(image4, pieces[3].getX(), pieces[3].getY(), null);
+		g.drawImage(image5, pieces[4].getX(), pieces[4].getY(), null);
+		g.drawImage(image6, pieces[5].getX(), pieces[5].getY(), null);
+		g.drawImage(image7, pieces[6].getX(), pieces[6].getY(), null);
+		g.drawImage(image8, pieces[7].getX(), pieces[7].getY(), null);
+		g.drawImage(image9, pieces[8].getX(), pieces[8].getY(), null);
+//		g.drawImage(images[0], pieces[0].getX(), pieces[0].getY(), null);
+//		g.drawImage(images[1], pieces[1].getX(), pieces[1].getY(), null);
+//		g.drawImage(images[2], pieces[2].getX(), pieces[2].getY(), null);
+//		g.drawImage(images[3], pieces[3].getX(), pieces[3].getY(), null);
+//		g.drawImage(images[4], pieces[4].getX(), pieces[4].getY(), null);
+//		g.drawImage(images[5], pieces[5].getX(), pieces[5].getY(), null);
+//		g.drawImage(images[6], pieces[6].getX(), pieces[6].getY(), null);
+//		g.drawImage(images[7], pieces[7].getX(), pieces[7].getY(), null);
+//		g.drawImage(images[8], pieces[8].getX(), pieces[8].getY(), null);
 
-		
 		Graphics2D g2 = (Graphics2D) g;
 		//MAKES THE GRID 100 by 100 px.
 		for (int y = 150; y <= 360; y += 70){
@@ -113,14 +179,14 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public void mouseClicked(MouseEvent e) {
 		Point clicked = e.getPoint();
 		
-		for(int i = 0; i < 9; i++){
-			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
-		}
-
-		for(int i = 0; i < 9; i++){
-			if(bounds[i].contains(clicked))
-				pieces[i].rotate();
-		}
+//		for(int i = 0; i < 9; i++){
+//			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
+//		}
+//
+//		for(int i = 0; i < 9; i++){
+//			if(bounds[i].contains(clicked))
+//				pieces[i].rotate();
+//		}
 		
 	}
 
@@ -129,18 +195,18 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public void mousePressed(MouseEvent e) {
 		Point pressed = e.getPoint();
 
-		for(int i = 0; i < 9; i++){
-			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
-		}
-		
-		for(int i = 0; i < 0; i++){
-			if(bounds[i].contains(pressed)){
-				dragging = true;
-				moveP[i] = true;
-			}
-		}
-		
-		System.out.println("mousePressed at " + pressed);
+//		for(int i = 0; i < 9; i++){
+//			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
+//		}
+//		
+//		for(int i = 0; i < 0; i++){
+//			if(bounds[i].contains(pressed)){
+//				dragging = true;
+//				moveP[i] = true;
+//			}
+//		}
+//		
+//		System.out.println("mousePressed at " + pressed);
 
 	}
 
@@ -149,8 +215,6 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		Point drag = e.getPoint();
 
 		if (dragging) {
-//			curX = drag.x;
-//			curY = drag.y;
 			for(int i = 0; i < 0; i ++){
 				if(moveP[i]){
 					pieces[i].setX(drag.x);
@@ -220,9 +284,6 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		//			}
 		//		}
 
-
-	//	System.out.println("coordinates from " + sX + "," + sY + " to " + curX + "," + curY);
-		//	System.out.println("released at "+ curX + "," + curY);
 	}
 
 
