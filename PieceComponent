@@ -17,14 +17,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 
-public class PieceComponent extends Piece implements MouseListener, MouseMotionListener{
+public class PieceComponent extends JComponent implements MouseListener, MouseMotionListener{
 	
 	private static BufferedImage image;
 	private int x;
 	private int y;
-	private int width = image.getWidth();
-	private int height = image.getHeight();
-	private boolean dragging = false;
+//	private int width = image.getWidth();
+//	private int height = image.getHeight();
+//	private boolean dragging = false;
 	private Piece piece;
 	
 	
@@ -35,16 +35,10 @@ public class PieceComponent extends Piece implements MouseListener, MouseMotionL
 		PieceComponent.image = image;
 	}
 	public int getWidth() {
-		return width;
-	}
-	public void setWidth(int width) {
-		this.width = width;
+		return image.getWidth();
 	}
 	public int getHeight() {
-		return height;
-	}
-	public void setHeight(int height) {
-		this.height = height;
+		return image.getHeight();
 	}
 	public int getX() {
 		return x;
@@ -58,20 +52,23 @@ public class PieceComponent extends Piece implements MouseListener, MouseMotionL
 	public void setY(int y) {
 		this.y = y;
 	}
+//	public boolean getDrag(){
+//		return dragging;
+//	}
+	
 
-
-
+	//ctor
 	public PieceComponent(int north, int east, int south, int west, BufferedImage image, int x, int y){
-		super(north, east, south, west);
-		PieceComponent.image = image;
+		this.piece= new Piece(north, east, south, west);
+		setImage(image);
 		this.x = x;
 		this.y = y;
 	}
 	
-		
-
-	public void rotate(int rotations){
-		piece.rotate(rotations);
+	
+	//rotates once 90 degrees, clockwise
+	public void rotate(){
+		piece.rotate();
 		AffineTransform at = new AffineTransform();
 		at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
 		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
@@ -90,57 +87,42 @@ public class PieceComponent extends Piece implements MouseListener, MouseMotionL
 	public void mouseClicked(MouseEvent e) {
 		Point clicked = e.getPoint();
 		
-		Rectangle bounds = new Rectangle(x, y, width, height);
+		Rectangle bounds = new Rectangle(x, y, getWidth(), getHeight());
 		
 		if(bounds.contains(clicked)){
 			
+			
 //			this.repaint();
 		}
-
 
 	}
 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		Point pressed = e.getPoint();
-		
-		Rectangle bounds = new Rectangle(x, y, width, height);
-		
-		if (bounds.contains(pressed)){
-			dragging = true;
-		}
+//		Point pressed = e.getPoint();
+//		
+//		Rectangle bounds = new Rectangle(x, y, getWidth(), getHeight());
+//		
+//		if (bounds.contains(pressed)){
+//			dragging = true;
+//		}
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		Point drag = e.getPoint();
-		if(dragging){
-			x = drag.x;
-			y = drag.y;
-		}
+//		Point drag = e.getPoint();
+//		if(dragging){
+//			x = drag.x;
+//			y = drag.y;
+//		}
 	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		Point released = e.getPoint();
-		dragging = false;
-//		Rectangle g1 = new Rectangle(426, 126, 70, 70);
-//		Rectangle g2 = new Rectangle(426, 196, 70, 70);
-//		Rectangle g3 = new Rectangle(426, 266, 70, 70);
-//		Rectangle g4 = new Rectangle(496, 126, 70, 70);
-//		Rectangle g5 = new Rectangle(496, 196, 70, 70);
-//		Rectangle g6 = new Rectangle(496, 266, 70, 70);
-//		Rectangle g7 = new Rectangle(566, 126, 70, 70);
-//		Rectangle g8 = new Rectangle(566, 196, 70, 70);
-//		Rectangle g9 = new Rectangle(566, 266, 70, 70);
-		
-		
-//		if (g1.contains(released)&&movep1) {
-//			x1=426;
-//			y1=126;
-//			System.out.println("in grid spot 1-- (0,0)");
-//		}
+//		Point released = e.getPoint();
+//		dragging = false;
+
 	}
 
 	@Override
