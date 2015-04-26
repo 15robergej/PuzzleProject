@@ -191,24 +191,6 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	}
 
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		Point pressed = e.getPoint();
-
-//		for(int i = 0; i < 9; i++){
-//			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
-//		}
-//		
-//		for(int i = 0; i < 0; i++){
-//			if(bounds[i].contains(pressed)){
-//				dragging = true;
-//				moveP[i] = true;
-//			}
-//		}
-//		
-//		System.out.println("mousePressed at " + pressed);
-
-	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -239,6 +221,20 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 
 	}
 
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		Point drag = e.getPoint();
+
+		if (dragging) {
+			for(int i = 0; i < 0; i ++){
+				if(moveP[i]){
+					pieces[i].setX(drag.x);
+					pieces[i].setY(drag.y);
+				}
+			}
+			repaint();
+		}
+	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		
