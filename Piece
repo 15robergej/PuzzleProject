@@ -62,7 +62,8 @@ public class Piece {
 	public String toString(){
 		String p = "";
 		for(int i = 0; i < edges.length; i++){
-			p+= edges[i];
+			p += edges[i];
+			p += ",";
 		}
 		return p;
 	}
