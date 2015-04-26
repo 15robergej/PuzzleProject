@@ -21,14 +21,18 @@ public class Puzzle {
 		
 		if (!board.isValid(row, col)) return false;
 		
-		if (board.isValid(row + 1, col) && board.hasPiece(row + 1, col))
-			pieceNorth = matchEdge(piece, board.getPiece(row + 1, col), 0);
+		if (board.isValid(row - 1, col) && board.hasPiece(row - 1, col))
+			pieceNorth = matchEdge(piece, board.getPiece(row - 1, col), 0);
+		
 		if (board.isValid(row, col + 1) && board.hasPiece(row, col + 1))
 			pieceEast = matchEdge(piece, board.getPiece(row, col + 1), 1);
-		if (board.isValid(row - 1, col) && board.hasPiece(row - 1, col))
-			pieceSouth = matchEdge(piece, board.getPiece(row - 1, col), 2);
+		
+		if (board.isValid(row + 1, col) && board.hasPiece(row + 1, col))
+			pieceSouth = matchEdge(piece, board.getPiece(row + 1, col), 2);
+		
 		if (board.isValid(row, col - 1) && board.hasPiece(row, col - 1))
 			pieceWest = matchEdge(piece, board.getPiece(row, col - 1), 3);
+			
 		
 		return pieceNorth && pieceEast && pieceSouth && pieceWest;
 	}
@@ -58,24 +62,39 @@ public class Puzzle {
 	}
 	
 	private boolean solve(int depth){
-		if (depth == board.getRows()*board.getCols() - 1) return true;
+		if (depth == board.getRows()*board.getCols()) return true;
 		boolean solved = false;
 		for (int i = 0; i < unusedPieces.size() && !solved; i++){
-			for (int j = 0; j < 4 && !solved; i++){
-				if (doesFit(depth/board.getCols(), depth%board.getCols(), unusedPieces.get(i))){
-					board.setPiece(depth/board.getCols(), depth%board.getCols(), unusedPieces.set(i, null));
-					solved = solve(depth + 1);
-				}
-				if (!solved){
-					if (unusedPieces.get(i) == null)
-						unusedPieces.set(i, board.removePiece(depth/board.getCols(), depth%board.getCols()));
-					else 
+			if (unusedPieces.get(i) != null){
+				for (int j = 0; j < 4 && !solved; j++){
+					if (doesFit(depth/getCols(), depth%getCols(), unusedPieces.get(i))){
+						board.setPiece(depth/getCols(), depth%getCols(), unusedPieces.set(i, null));
+						solved = solve(depth + 1);
+					}
+					if (!solved){
+						if (unusedPieces.get(i) == null)
+							unusedPieces.set(i, board.removePiece(depth/getCols(), depth%getCols()));
 						unusedPieces.get(i).rotate();
+					}
+					System.out.println(board);
+					System.out.println(unusedPieces.get(i));
 				}
 			}
 		}
 		return solved;
 	}
+	
+//	private void reset(int depth, int index){
+//		unusedPieces.set(index, board.removePiece(depth/getCols(), depth%getCols())); 
+//	}
+//	private boolean solve2(int depth){
+//		if (depth == board.getRows()*board.getCols()) return true;
+//		boolean solved = false;
+//		for (int i = 0; i < unusedPieces.size() && !solved; i++){
+//			
+//		}
+//		
+//	}
 
 
 	public void addPiece(Piece piece){
@@ -106,7 +125,11 @@ public class Puzzle {
 	}
 
 	public boolean matchEdge(Piece piece1, Piece piece2, int d1to2){
-		if (d1to2 > 1) d1to2 -= 2;
+		if (d1to2 > 1){
+			System.out.println(piece1.getEdge(d1to2) + " + " + piece2.getEdge(d1to2 - 2));
+			return (piece1.getEdge(d1to2) + piece2.getEdge(d1to2 - 2) == 0);
+		}
+		System.out.println(piece1.getEdge(d1to2) + " + " + piece2.getEdge(d1to2 + 2));
 		return (piece1.getEdge(d1to2) + piece2.getEdge(d1to2 + 2) == 0);
 	}
 
@@ -127,6 +150,27 @@ public class Puzzle {
 	}
 
 	public static void main(String[] args) {
-		
+		Puzzle pzl = new Puzzle(3, 3);
+		Piece a = new Piece(Piece.CLUBS_OUT, Piece.HEARTS_OUT, Piece.DIAMONDS_IN, Piece.CLUBS_IN);
+		Piece b = new Piece(Piece.SPADES_OUT, Piece.DIAMONDS_OUT, Piece.SPADES_IN, Piece.HEARTS_IN);
+		Piece c = new Piece(Piece.HEARTS_OUT, Piece.SPADES_OUT, Piece.SPADES_IN, Piece.CLUBS_IN);
+		Piece d = new Piece(Piece.HEARTS_OUT, Piece.DIAMONDS_OUT, Piece.CLUBS_IN, Piece.CLUBS_IN);
+		Piece e = new Piece(Piece.SPADES_OUT, Piece.SPADES_OUT, Piece.HEARTS_IN, Piece.CLUBS_IN);
+		Piece f = new Piece(Piece.HEARTS_OUT, Piece.DIAMONDS_OUT, Piece.DIAMONDS_IN, Piece.HEARTS_IN);
+		Piece g = new Piece(Piece.SPADES_OUT, Piece.DIAMONDS_OUT, Piece.HEARTS_OUT, Piece.DIAMONDS_OUT);
+		Piece h = new Piece(Piece.CLUBS_OUT, Piece.HEARTS_OUT, Piece.SPADES_IN, Piece.HEARTS_IN);
+		Piece i = new Piece(Piece.CLUBS_OUT, Piece.CLUBS_IN, Piece.DIAMONDS_IN, Piece.DIAMONDS_OUT);
+		pzl.addPiece(a);
+		pzl.addPiece(b);
+		pzl.addPiece(c);
+		pzl.addPiece(d);
+		pzl.addPiece(e);
+		pzl.addPiece(f);
+		pzl.addPiece(g);
+		pzl.addPiece(h);
+		pzl.addPiece(i);
+		pzl.solve();
+
+		System.out.println(pzl);
 	}
 }
