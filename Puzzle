@@ -57,45 +57,32 @@ public class Puzzle {
 	public void solve(){
 		restart();
 		solve(0);
-		for (int i = unusedPieces.size() - 1; i >= 0; i--)
+		for (int i = unusedPieces.size() - 1; i > 0; i--)
 			if (unusedPieces.get(i) == null) unusedPieces.remove(i);
 	}
 	
 	private boolean solve(int depth){
 		if (depth == board.getRows()*board.getCols()) return true;
 		boolean solved = false;
+		int row = depth/getCols();
+		int col = depth%getCols();
 		for (int i = 0; i < unusedPieces.size() && !solved; i++){
 			if (unusedPieces.get(i) != null){
 				for (int j = 0; j < 4 && !solved; j++){
-					if (doesFit(depth/getCols(), depth%getCols(), unusedPieces.get(i))){
-						board.setPiece(depth/getCols(), depth%getCols(), unusedPieces.set(i, null));
+					if (doesFit(row, col, unusedPieces.get(i))){
+						board.setPiece(row, col, unusedPieces.set(i, null));
 						solved = solve(depth + 1);
 					}
 					if (!solved){
 						if (unusedPieces.get(i) == null)
-							unusedPieces.set(i, board.removePiece(depth/getCols(), depth%getCols()));
+							unusedPieces.set(i, board.removePiece(row, col));
 						unusedPieces.get(i).rotate();
 					}
-					System.out.println(board);
-					System.out.println(unusedPieces.get(i));
 				}
 			}
 		}
 		return solved;
 	}
-	
-//	private void reset(int depth, int index){
-//		unusedPieces.set(index, board.removePiece(depth/getCols(), depth%getCols())); 
-//	}
-//	private boolean solve2(int depth){
-//		if (depth == board.getRows()*board.getCols()) return true;
-//		boolean solved = false;
-//		for (int i = 0; i < unusedPieces.size() && !solved; i++){
-//			
-//		}
-//		
-//	}
-
 
 	public void addPiece(Piece piece){
 		unusedPieces.add(piece);
@@ -125,12 +112,7 @@ public class Puzzle {
 	}
 
 	public boolean matchEdge(Piece piece1, Piece piece2, int d1to2){
-		if (d1to2 > 1){
-			System.out.println(piece1.getEdge(d1to2) + " + " + piece2.getEdge(d1to2 - 2));
-			return (piece1.getEdge(d1to2) + piece2.getEdge(d1to2 - 2) == 0);
-		}
-		System.out.println(piece1.getEdge(d1to2) + " + " + piece2.getEdge(d1to2 + 2));
-		return (piece1.getEdge(d1to2) + piece2.getEdge(d1to2 + 2) == 0);
+		return (piece1.getEdge(d1to2) + piece2.getEdge((d1to2 + 2)%4) == 0);
 	}
 
 	public List<Piece> getUnusedPieces(){
@@ -157,7 +139,7 @@ public class Puzzle {
 		Piece d = new Piece(Piece.HEARTS_OUT, Piece.DIAMONDS_OUT, Piece.CLUBS_IN, Piece.CLUBS_IN);
 		Piece e = new Piece(Piece.SPADES_OUT, Piece.SPADES_OUT, Piece.HEARTS_IN, Piece.CLUBS_IN);
 		Piece f = new Piece(Piece.HEARTS_OUT, Piece.DIAMONDS_OUT, Piece.DIAMONDS_IN, Piece.HEARTS_IN);
-		Piece g = new Piece(Piece.SPADES_OUT, Piece.DIAMONDS_OUT, Piece.HEARTS_OUT, Piece.DIAMONDS_OUT);
+		Piece g = new Piece(Piece.SPADES_OUT, Piece.DIAMONDS_OUT, Piece.HEARTS_IN, Piece.DIAMONDS_IN);
 		Piece h = new Piece(Piece.CLUBS_OUT, Piece.HEARTS_OUT, Piece.SPADES_IN, Piece.HEARTS_IN);
 		Piece i = new Piece(Piece.CLUBS_OUT, Piece.CLUBS_IN, Piece.DIAMONDS_IN, Piece.DIAMONDS_OUT);
 		pzl.addPiece(a);
@@ -172,5 +154,7 @@ public class Puzzle {
 		pzl.solve();
 
 		System.out.println(pzl);
+		
+		System.out.println(pzl.getUnusedPieces());
 	}
 }
