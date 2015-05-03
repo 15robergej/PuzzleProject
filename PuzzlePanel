@@ -48,7 +48,6 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		pieces[8] = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
 	}
 	public void solve(){
-
 		p.solve();
 	}
 
@@ -114,16 +113,16 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		
 	}
 
-	public void rotatePiece(PieceComponent p){
-		p.rotate();
-		AffineTransform at = new AffineTransform();
-		at.rotate(Math.PI/2, p.getWidth() / 2, p.getHeight() / 2);
-		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-		p.setImage(op.filter(p.getImage(), null));
-		p.getImage().createGraphics().drawImage(p.getImage(), 0, 0, null);
-		
-		this.repaint();
-	}
+//	public void rotatePiece(PieceComponent p){
+//		p.rotate();
+////		AffineTransform at = new AffineTransform();
+////		at.rotate(Math.PI/2, p.getWidth() / 2, p.getHeight() / 2);
+////		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+////		p.setImage(op.filter(p.getImage(), null));
+////		p.getImage().createGraphics().drawImage(p.getImage(), 0, 0, null);
+//		
+//		this.repaint();
+//	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
@@ -159,7 +158,9 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		for(int i = 0; i < 9; i++){
 			if(bounds[i].contains(clicked))
 				System.out.println("p" + i + " clicked");
-			rotatePiece(pieces[i]);
+			
+			pieces[i].mouseClicked(e);
+//			rotatePiece(pieces[i]);
 		}
 
 	}
