@@ -35,29 +35,6 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	
 	public void restart(){
 		p.restart();
-		pieces[0] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
-		pieces[1] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
-		pieces[2] = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
-		pieces[3] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, images[3], 0, 360);
-		pieces[4] = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, images[4], 0, 480);
-		pieces[5] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, images[5], 120, 20);
-		pieces[6] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
-		pieces[7] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
-		pieces[8] = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
-	}
-	public void solve(){
-		p.solve();
-	}
-
-
-	PieceComponent[] pieces = new PieceComponent[9];
-
-	BufferedImage[] images = new BufferedImage[9];
-
-	private Rectangle[] bounds= new Rectangle[9];
-
-
-	public PuzzlePanel() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
 
@@ -77,6 +54,31 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		} catch (IOException ex) {
 			System.out.println("image not found");
 		}		
+		
+		pieces[0] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
+		pieces[1] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
+		pieces[2] = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
+		pieces[3] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, images[3], 0, 360);
+		pieces[4] = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, images[4], 0, 480);
+		pieces[5] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, images[5], 120, 20);
+		pieces[6] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
+		pieces[7] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
+		pieces[8] = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
+		this.repaint();
+	}
+	public void solve(){
+		p.solve();
+	}
+
+
+	PieceComponent[] pieces = new PieceComponent[9];
+
+	BufferedImage[] images = new BufferedImage[9];
+
+	private Rectangle[] bounds= new Rectangle[9];
+
+
+	public PuzzlePanel() {
 		restart();
 	}
 
