@@ -74,6 +74,7 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
 		image = op.filter(image, null);
 		image.createGraphics().drawImage(image, 0, 0, null);
+		
 	}
 
 	
@@ -90,9 +91,9 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 		Rectangle bounds = new Rectangle(x, y, getWidth(), getHeight());
 		
 		if(bounds.contains(clicked)){
+			rotate();
 			
-			
-//			this.repaint();
+			this.repaint();
 		}
 
 	}
