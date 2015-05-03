@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionListener{
 
+
 	boolean dragging = false;
 	//boolean for whether or not a piece is being moved/dragged
 
@@ -31,13 +32,22 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	int SPADES_OUT = 4;
 	//Maybe use enums although I'm not too sure how they work.
 
-	static Puzzle p = new Puzzle(3, 3);
+	private Puzzle p = new Puzzle(3, 3);
 
-	public static void restart(){
-
+	
+	public void restart(){
 		p.restart();
+		pieces[0] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
+		pieces[1] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
+		pieces[2] = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
+		pieces[3] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, images[3], 0, 360);
+		pieces[4] = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, images[4], 0, 480);
+		pieces[5] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, images[5], 120, 20);
+		pieces[6] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
+		pieces[7] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
+		pieces[8] = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
 	}
-	public static void solve(){
+	public void solve(){
 
 		p.solve();
 	}
@@ -70,15 +80,16 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		} catch (IOException ex) {
 			System.out.println("image not found");
 		}		
-		pieces[0] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
-		pieces[1] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
-		pieces[2] = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
-		pieces[3] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, images[3], 0, 360);
-		pieces[4] = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, images[4], 0, 480);
-		pieces[5] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, images[5], 120, 20);
-		pieces[6] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
-		pieces[7] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
-		pieces[8] = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
+		restart();
+//		pieces[0] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
+//		pieces[1] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
+//		pieces[2] = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
+//		pieces[3] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, images[3], 0, 360);
+//		pieces[4] = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, images[4], 0, 480);
+//		pieces[5] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, images[5], 120, 20);
+//		pieces[6] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
+//		pieces[7] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
+//		pieces[8] = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
 	}
 
 
@@ -110,6 +121,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
 		p.setImage(op.filter(p.getImage(), null));
 		p.getImage().createGraphics().drawImage(p.getImage(), 0, 0, null);
+		
 		this.repaint();
 	}
 
@@ -157,18 +169,18 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	public void mousePressed(MouseEvent e) {
 		Point pressed = e.getPoint();
 
-		//		for(int i = 0; i < 9; i++){
-		//			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
-		//		}
-		//		
-		//		for(int i = 0; i < 0; i++){
-		//			if(bounds[i].contains(pressed)){
-		//				dragging = true;
-		//				moveP[i] = true;
-		//			}
-		//		}
-		//		
-		//		System.out.println("mousePressed at " + pressed);
+		for(int i = 0; i < 9; i++){
+			bounds[i] = new Rectangle(pieces[i].getX(), pieces[i].getY(), images[i].getWidth(), images[i].getHeight());
+		}
+
+		for(int i = 0; i < 0; i++){
+			if(bounds[i].contains(pressed)){
+				dragging = true;
+				moveP[i] = true;
+			}
+		}
+
+		System.out.println("mousePressed at " + pressed);
 
 	}
 
