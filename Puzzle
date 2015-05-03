@@ -1,11 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * David Chen and Shreya Hegde
+ * 
+ * Puzzle class
+ */
 public class Puzzle {
+	
+	// Private data board and an ArrayList of unused Pieces
 	private Board board;
 	private ArrayList<Piece> unusedPieces = new ArrayList<>();
-
+	
+	// Constructors 
 	public Puzzle(int rows, int cols){
 		board = new Board(rows, cols);
 	}
@@ -13,7 +20,9 @@ public class Puzzle {
 		this.board = board;
 	}
 	public Puzzle(int rows, int cols, ArrayList<Piece> startingPieces){
-		//do this
+		this(rows, cols);
+		for (Piece p: startingPieces)
+			addPiece(p);
 	}
 
 	public boolean doesFit(int row, int col, Piece piece){
