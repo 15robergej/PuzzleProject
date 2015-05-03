@@ -59,6 +59,8 @@ public class Display {
 		
 		class RestartListener implements ActionListener {
 			public void actionPerformed(ActionEvent event){
+				puzzlePanel.restart();
+				System.out.println("Restart button pressed.");
 				//what it does
 			}
 		}
@@ -72,7 +74,8 @@ public class Display {
 		
 		class SolveListener implements ActionListener {
 			public void actionPerformed(ActionEvent event){
-				PuzzlePanel.solve();
+				puzzlePanel.solve();
+				System.out.println("Solve button pressed.");
 			}
 		}
 		
