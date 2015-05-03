@@ -33,11 +33,15 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 
 	private Puzzle p = new Puzzle(3, 3);
 	
+	private PieceComponent[] pieces = new PieceComponent[9];
+
+	private BufferedImage[] images = new BufferedImage[9];
+
+	private Rectangle[] bounds= new Rectangle[9];
+	
 	public void restart(){
 		p.restart();
-		addMouseListener(this);
-		addMouseMotionListener(this);
-
+		
 		try {                 
 			images[0] = ImageIO.read(this.getClass().getResource("piece_1.png"));
 			images[1] = ImageIO.read(this.getClass().getResource("piece_2.png"));
@@ -70,19 +74,11 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		p.solve();
 	}
 
-
-	PieceComponent[] pieces = new PieceComponent[9];
-
-	BufferedImage[] images = new BufferedImage[9];
-
-	private Rectangle[] bounds= new Rectangle[9];
-
-
 	public PuzzlePanel() {
+		addMouseListener(this);
+		addMouseMotionListener(this);
 		restart();
 	}
-
-
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
