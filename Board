@@ -41,15 +41,15 @@ public class Board {
 		if(board[row][col] == null) return false; 
 		return true; 
 	}
-	
+
 	public boolean isValid(int row, int col){
-		if(row > board.length && row >= 0|| col < board[0].length && col >= 0){
-			return false; }
-	
-			return true;
+		if((row < 0 || row >= board.length) || (col < 0 || col >= board[0].length))
+			return false; 
+
+		return true;
 
 	}
-	
+
 	public int getRows(){
 		return board.length; 
 	}
