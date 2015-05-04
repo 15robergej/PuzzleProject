@@ -20,6 +20,8 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	//boolean for whether or not a piece is being moved/dragged
 
 	private boolean [] moveP = {false, false, false, false, false, false, false, false, false};
+	
+	private boolean [] filled = {false, false, false, false, false, false, false, false, false};
 
 	int HEARTS_IN = -1;
 	int HEARTS_OUT = 1;
@@ -218,7 +220,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 
 		Rectangle[] grid = {g1, g2, g3, g4, g5, g6, g7, g8, g9};
 		
-		boolean[] filled = {false, false, false, false, false, false, false, false, false};
+		
 
 		for(int i = 0; i < 9; i ++){
 			for(int j = 0; j < 9; j++){
@@ -228,12 +230,18 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 					filled[i] = true;
 					System.out.println("IN GRID");
 				}
-
+				else if(!box.contains(released) && moveP[j] && filled[i] == true){
+					pieces[j].setX(oldX[j]);
+					pieces[j].setY(oldY[j]);
+					filled[i] = false;
+					System.out.println("Not in box");
+				}
 				else if(!box.contains(released) && moveP[j]){
 					pieces[j].setX(oldX[j]);
 					pieces[j].setY(oldY[j]);
 					System.out.println("Not in box");
 				}
+				
 			}
 		}
 		//
