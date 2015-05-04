@@ -1,11 +1,17 @@
-
+/**
+ * David Chen and Shreya Hegde
+ * 
+ * Piece class
+ */
 public class Piece {
 	
+	// Directional constants
 	public static final int NORTH = 0;
 	public static final int EAST = 1;
 	public static final int SOUTH = 2;
 	public static final int WEST = 3;
 	
+	// Constants representing shape of side
 	public static final int HEARTS_IN = -1; 
 	public static final int HEARTS_OUT = 1;
 	public static final int DIAMONDS_IN = -2;
@@ -15,9 +21,12 @@ public class Piece {
 	public static final int SPADES_IN= -4;
 	public static final int SPADES_OUT = 4;
 	
+	// Holds 4 of the values above
 	private int[] edges;
+	// Which way it is facing, 0 being original and rotating 90 d clockwise
 	private int orientation = 0;
 	
+	// Constructor
 	public Piece(int north, int east, int south, int west){
 		this.edges = new int[4];
 		edges[NORTH] = north;
@@ -26,6 +35,7 @@ public class Piece {
 		edges[WEST] = west; 
 	}
 
+	// Constructor with array
 	public Piece(int[] edges){
 		this.edges = new int[edges.length];
 		for(int i = 0; i < edges.length; i++){
@@ -34,16 +44,19 @@ public class Piece {
 		
 	}
 	
+	// Returns an edge
 	public int getEdge(int direction){
 		return edges[direction];		
 	}
 	
+	// Shifts all values in edges over (by number of rotations)
 	public void rotate(int rotations){
 		for(int i = 0; i < rotations; i++){
 			rotate();
 		}
 	}
 	
+	// Shifts all values in edges over 1
 	public void rotate(){
 		int temp = edges[NORTH];
 		edges[NORTH] = edges[WEST];
@@ -55,6 +68,7 @@ public class Piece {
 		if (orientation == 4) orientation = 0;
 	}
 	
+	// returns the orientation
 	public int getOrientation(){
 		return orientation;
 	}
@@ -68,6 +82,7 @@ public class Piece {
 		return p;
 	}
 	
+	// Made a small piece
 	public static void main(String[] args){
 		
 		int[]edges = {1, 2, 2, 3};
@@ -80,4 +95,3 @@ public class Piece {
 	}
 
 }
-
