@@ -25,6 +25,7 @@ public class Puzzle {
 			addPiece(p);
 	}
 
+	// Checks all directions directly next to the piece on the board to see if the piece is able to fit.
 	public boolean doesFit(int row, int col, Piece piece){
 		boolean pieceNorth = true, pieceEast = true, pieceSouth = true, pieceWest = true;
 		
@@ -46,15 +47,17 @@ public class Puzzle {
 		return pieceNorth && pieceEast && pieceSouth && pieceWest;
 	}
 	
+	// Moves all pieces on the board to unusedPieces, then makes a fresh new board
 	public void restart(){
 		for (int i = 0; i < board.getRows(); i++){
 			for (int j = 0; j < board.getCols(); j++){
 				if (board.hasPiece(i, j)) addPiece(board.getPiece(i, j));
 			}
 		}
-		board = new Board(board.getRows(), board.getCols());
+		board.clear();
 	}
 	
+	// Simply returns true if the board is full
 	public boolean isSolved(){
 		for (int i = 0; i < board.getRows(); i++)
 			for (int j = 0; j < board.getCols(); j++){
@@ -63,40 +66,53 @@ public class Puzzle {
 		return true;
 	}
 
+	// Restarts the board, then solves it with a helper method, then cleans out unusedPieces for placeholders
 	public void solve(){
 		restart();
 		solve(0);
-		for (int i = unusedPieces.size() - 1; i > 0; i--)
+		for (int i = unusedPieces.size() - 1; i > -1; i--)
 			if (unusedPieces.get(i) == null) unusedPieces.remove(i);
 	}
 	
+	// Base case: if the method reaches past the board values, it has solved it.
+	// Goes through and solves each square of the board recursively.
 	private boolean solve(int depth){
 		if (depth == board.getRows()*board.getCols()) return true;
+		
 		boolean solved = false;
+		
 		int row = depth/getCols();
 		int col = depth%getCols();
+		
 		for (int i = 0; i < unusedPieces.size() && !solved; i++){
+			
 			if (unusedPieces.get(i) != null){
 				for (int j = 0; j < 4 && !solved; j++){
+					
 					if (doesFit(row, col, unusedPieces.get(i))){
 						board.setPiece(row, col, unusedPieces.set(i, null));
 						solved = solve(depth + 1);
 					}
+					
 					if (!solved){
 						if (unusedPieces.get(i) == null)
 							unusedPieces.set(i, board.removePiece(row, col));
 						unusedPieces.get(i).rotate();
 					}
+					
 				}
 			}
 		}
 		return solved;
 	}
 
+	// Adds a piece to unusedPieces
 	public void addPiece(Piece piece){
 		unusedPieces.add(piece);
 	}
 
+	// Turns a square at the coordinates into a piece if it fits there.
+	// Removes it from unusedPieces, and if it replaces a piece, it adds that to unused Pieces
 	public Piece setPiece(int row, int col, Piece piece){
 		if (doesFit(row, col, piece)){
 			unusedPieces.remove(piece);
@@ -108,30 +124,38 @@ public class Puzzle {
 		}
 		return null;
 	}
+	
+	// Gets a piece from the board.
 	public Piece getPiece(int row, int col){
 		return board.getPiece(row, col);
 	}
 
+	// Removes a piece from the board and adds it to unusedPieces
+	// if it does not exist, returns null
 	public Piece removePiece(int row, int col){
 		if(board.hasPiece(row, col)){
-			unusedPieces.add((getPiece(row, col)));
+			addPiece(getPiece(row, col));
 			return board.removePiece(row, col);
 		}
 		return null;
 	}
 
+	// matches the edge of one piece to another from the first to the second.
 	public boolean matchEdge(Piece piece1, Piece piece2, int d1to2){
 		return (piece1.getEdge(d1to2) + piece2.getEdge((d1to2 + 2)%4) == 0);
 	}
 
+	// returns unusedPieces
 	public List<Piece> getUnusedPieces(){
-		return unusedPieces.subList(0, unusedPieces.size() - 1);
+		return unusedPieces.subList(0, unusedPieces.size());
 	}
 	
+	// returns the amount of rows in the board
 	public int getRows(){
 		return board.getRows();
 	}
 	
+	// returns the amount of cols in the board
 	public int getCols(){
 		return board.getCols();
 	}
@@ -141,6 +165,8 @@ public class Puzzle {
 	}
 
 	public static void main(String[] args) {
+		
+		// All of the pieces. It solves them
 		Puzzle pzl = new Puzzle(3, 3);
 		Piece a = new Piece(Piece.CLUBS_OUT, Piece.HEARTS_OUT, Piece.DIAMONDS_IN, Piece.CLUBS_IN);
 		Piece b = new Piece(Piece.SPADES_OUT, Piece.DIAMONDS_OUT, Piece.SPADES_IN, Piece.HEARTS_IN);
@@ -161,7 +187,24 @@ public class Puzzle {
 		pzl.addPiece(h);
 		pzl.addPiece(i);
 		pzl.solve();
+		
+		// Now just testing other methods
+		pzl.removePiece(1, 1);
 
+		System.out.println(pzl);
+		
+		System.out.println(pzl.getUnusedPieces());
+		
+		pzl.getUnusedPieces().get(0).rotate();
+		pzl.setPiece(1, 1, pzl.getUnusedPieces().get(0));
+		
+		System.out.println(pzl);
+		
+		System.out.println(pzl.getUnusedPieces());
+		
+		pzl.getUnusedPieces().get(0).rotate(3);
+		pzl.setPiece(1, 1, pzl.getUnusedPieces().get(0));
+		
 		System.out.println(pzl);
 		
 		System.out.println(pzl.getUnusedPieces());
