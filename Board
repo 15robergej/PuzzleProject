@@ -1,34 +1,45 @@
-
+/**
+ * David Chen and Shreya Hegde
+ * 
+ * Board class
+ */
 public class Board {
 
+	// 2D array with all Pieces in here
 	private Piece[][] board;
 	
-	
+	// Constructor
 	public Board(int rows, int cols){
 		this.board = new Piece[rows][cols];
 	}
 	
+	// Square constructor
 	public Board(int sides){
 		this.board = new Piece[sides][sides];
 		
 	}
 	
+	// Sets a square on the board to hold a piece, if it replaces anything, it returns that piece
+	// Otherwise null
 	public Piece setPiece(int row, int col, Piece p){
 		Piece temp = board[row][col];
 		board[row][col] = p;
 		return temp;
 	}
 	
+	// Removes a piece from the board.
 	public Piece removePiece(int row, int col){
 		Piece temp = board[row][col];
 		board[row][col] = null;
 		return temp; 
 	}
 	
+	// Returns a piece from the board
 	public Piece getPiece(int row, int col){
 		return board[row][col];
 	}
 	
+	// Clears the board
 	public void clear(){
 		for(int row= 0; row < board.length; row++){
 			for(int col = 0; col < board[0].length; col++){
@@ -37,11 +48,13 @@ public class Board {
 		}
 	}
 	
+	// Checks to see if a specified location is occupied
 	public boolean hasPiece(int row, int col){
 		if(board[row][col] == null) return false; 
 		return true; 
 	}
 
+	// Checks to see if a specified location is within bounds
 	public boolean isValid(int row, int col){
 		if((row < 0 || row >= board.length) || (col < 0 || col >= board[0].length))
 			return false; 
@@ -50,11 +63,12 @@ public class Board {
 
 	}
 
+	// Returns number of rows
 	public int getRows(){
 		return board.length; 
 	}
 	
-	
+	// Returns number of columns
 	public int getCols(){
 		return board[0].length;
 	}
@@ -71,12 +85,12 @@ public class Board {
 		return s;
 	}
 	
+	// Made a board. Further tested in Puzzle class.
 	public static void main(String[] args){
 		
 		Board b = new Board(3, 3);
 		System.out.println(b.toString());
 		
 	}
-
 
 }
