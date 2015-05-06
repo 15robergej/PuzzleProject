@@ -44,6 +44,19 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	
 	private int [] oldY = {0, 120, 240, 360, 480, 20, 140, 260, 380};
 	
+	private Rectangle g1 = new Rectangle(426, 126, 70, 70);
+	private Rectangle g2 = new Rectangle(426, 196, 70, 70);
+	private Rectangle g3 = new Rectangle(426, 266, 70, 70);
+	private Rectangle g4 = new Rectangle(496, 126, 70, 70);
+	private Rectangle g5 = new Rectangle(496, 196, 70, 70);
+	private Rectangle g6 = new Rectangle(496, 266, 70, 70);
+	private Rectangle g7 = new Rectangle(566, 126, 70, 70);
+	private Rectangle g8 = new Rectangle(566, 196, 70, 70);
+	private Rectangle g9 = new Rectangle(566, 266, 70, 70);
+	private Rectangle box = new Rectangle(426, 126, 210, 210);
+
+	private Rectangle[] grid = {g1, g2, g3, g4, g5, g6, g7, g8, g9};
+	
 	
 	
 	public void restart(){
@@ -170,6 +183,9 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 				dragging = true;
 				moveP[i] = true;
 			}
+			if(grid[i].contains(pressed)){
+				filled[i] = false;
+			}
 		}
 
 		System.out.println("mousePressed at " + pressed);
@@ -214,18 +230,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 
 		//if dropped in the grid, allow piece to stay
 		//otherwise send piece back to default position (<--maybe??)
-		Rectangle g1 = new Rectangle(426, 126, 70, 70);
-		Rectangle g2 = new Rectangle(426, 196, 70, 70);
-		Rectangle g3 = new Rectangle(426, 266, 70, 70);
-		Rectangle g4 = new Rectangle(496, 126, 70, 70);
-		Rectangle g5 = new Rectangle(496, 196, 70, 70);
-		Rectangle g6 = new Rectangle(496, 266, 70, 70);
-		Rectangle g7 = new Rectangle(566, 126, 70, 70);
-		Rectangle g8 = new Rectangle(566, 196, 70, 70);
-		Rectangle g9 = new Rectangle(566, 266, 70, 70);
-		Rectangle box = new Rectangle(426, 126, 210, 210);
-
-		Rectangle[] grid = {g1, g2, g3, g4, g5, g6, g7, g8, g9};
+		
 		
 		
 
