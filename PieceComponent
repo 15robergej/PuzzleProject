@@ -16,9 +16,14 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
+/*
+ * Public class PieceCompononent to connect the Piece objects with their
+ * corresponding buffered images. 
+ */
 
 public class PieceComponent extends JComponent implements MouseListener, MouseMotionListener{
 	
+	//private data 
 	private static BufferedImage image;
 	private int x;
 	private int y;
@@ -27,11 +32,13 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 //	private boolean dragging = false;
 	private Piece piece;
 	
+//	Graphics g;
 	
-	public static BufferedImage getImage() {
+	//getters and setters for private data 
+	public BufferedImage getImage() {
 		return image;
 	}
-	public static void setImage(BufferedImage image) {
+	public void setImage(BufferedImage image) {
 		PieceComponent.image = image;
 	}
 	public int getWidth() {
@@ -52,32 +59,38 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 	public void setY(int y) {
 		this.y = y;
 	}
+	public Piece getPiece(){
+		return piece; 
+	}
 //	public boolean getDrag(){
 //		return dragging;
 //	}
 	
 
-	//ctor
-	public PieceComponent(int north, int east, int south, int west, BufferedImage image, int x, int y){
-		this.piece= new Piece(north, east, south, west);
+	/*constructor which takes in 4 ints for each side of the piece and a buffered image and
+	 * x and y coordinates for a location. 
+	 */
+ 	public PieceComponent(int north, int east, int south, int west, BufferedImage image, int x, int y){
+		this.piece = new Piece(north, east, south, west);
 		setImage(image);
 		this.x = x;
 		this.y = y;
 	}
 	
+	//alternate constructor which recieves a piece instead of 4 directions
+	public PieceComponent(Piece piece, BufferedImage image, int x, int y){
+		this.piece = piece;
+		setImage(image);
+		this.x = x;
+		this.y = y;
+	}
 	
-	//rotates once 90 degrees, clockwise
+	//rotates the actual piece 90 degrees (clockwise) each time the method is called
 	public void rotate(){
 		piece.rotate();
-		AffineTransform at = new AffineTransform();
-		at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
-		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-		image = op.filter(image, null);
-		image.createGraphics().drawImage(image, 0, 0, null);
-		
+
 	}
 
-	
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
@@ -86,15 +99,15 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Point clicked = e.getPoint();
-		
-		Rectangle bounds = new Rectangle(x, y, getWidth(), getHeight());
-		
-		if(bounds.contains(clicked)){
-			rotate();
-			
-			this.repaint();
-		}
+//		Point clicked = e.getPoint();
+//		
+//		Rectangle bounds = new Rectangle(x, y, getWidth(), getHeight());
+//		
+//		if(bounds.contains(clicked)){
+//			rotate();
+////			paintComponent(g);
+//			this.repaint();
+//		}
 
 	}
 
