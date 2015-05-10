@@ -12,9 +12,6 @@ public class PieceComponent extends JComponent {
 	private BufferedImage image;
 	private int x;
 	private int y;
-//	private int width = image.getWidth();
-//	private int height = image.getHeight();
-//	private boolean dragging = false;
 	private Piece piece;
 	
 //	Graphics g;
