@@ -99,8 +99,9 @@ public class Display {
 		class SolveListener implements ActionListener {
 			public void actionPerformed(ActionEvent event){
 				JFrame a = new JFrame();	
-				JLabel label = new JLabel("<html><center>Thanks for playing our Puzzle Project! <br> Drag the pieces to their appropriate places on the grid."
-						+ "<br>To rotate, click on a piece and it will rotate 90 degrees clockwise.<br>"
+				JLabel label = new JLabel("<html><center><b>Thanks for playing our Puzzle Project!</b><br><br>"
+						+ "<b><u>Instructions</b></i><br>Drag the pieces to their appropriate places on the grid."
+						+ "<br>To rotate, click on a piece and it will rotate 90 degrees clockwise. It is not possible to rotate pieces on the board.<br>"
 						+ "The solve button will put each of the pieces on the board in their correct places and provide one of the 4 solutions to the puzzle."
 						+ "<br>The restart button will remove all the pieces from the board and turn all the pieces back to their original orientation."
 						+ "<br><br>"
@@ -133,27 +134,9 @@ public class Display {
 		board.setBackground(Color.blue);
 		board.setVisible(true);
 		
-//		GridBagConstraints c = new GridBagConstraints();
-//		c.gridwidth=2;
-//		c.gridheight=2;
-//		c.gridx = 3;
-//		c.gridy = 0;
-//		c.insets = new Insets(0, 0, 0, 0);
-//		c.fill = GridBagConstraints.BOTH;
-	//	c.anchor = GridBagConstraints.EAST;
 		panel.add(board);
-		
-		//drag listener?
 	
 	}
-	
-//	public static void addPieces(JFrame frame) {
-//		
-//		final PieceComponent pieces= new PieceComponent();
-//	
-//		frame.add(pieces);
-//		
-//		}
 	
 	public void addPuzzle(){
 		
