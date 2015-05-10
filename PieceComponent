@@ -1,19 +1,4 @@
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 /*
@@ -21,10 +6,10 @@ import javax.swing.JComponent;
  * corresponding buffered images. 
  */
 
-public class PieceComponent extends JComponent implements MouseListener, MouseMotionListener{
+public class PieceComponent extends JComponent {
 	
 	//private data 
-	private static BufferedImage image;
+	private BufferedImage image;
 	private int x;
 	private int y;
 //	private int width = image.getWidth();
@@ -39,7 +24,7 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 		return image;
 	}
 	public void setImage(BufferedImage image) {
-		PieceComponent.image = image;
+		this.image = image;
 	}
 	public int getWidth() {
 		return image.getWidth();
@@ -91,63 +76,6 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 
 	}
 
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-//		Point clicked = e.getPoint();
-//		
-//		Rectangle bounds = new Rectangle(x, y, getWidth(), getHeight());
-//		
-//		if(bounds.contains(clicked)){
-//			rotate();
-////			paintComponent(g);
-//			this.repaint();
-//		}
-
-	}
-
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-//		Point pressed = e.getPoint();
-//		
-//		Rectangle bounds = new Rectangle(x, y, getWidth(), getHeight());
-//		
-//		if (bounds.contains(pressed)){
-//			dragging = true;
-//		}
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent e) {
-//		Point drag = e.getPoint();
-//		if(dragging){
-//			x = drag.x;
-//			y = drag.y;
-//		}
-	}
-	
-	@Override
-	public void mouseReleased(MouseEvent e) {
-//		Point released = e.getPoint();
-//		dragging = false;
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
 
 
 }
