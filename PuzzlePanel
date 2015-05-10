@@ -112,7 +112,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for(int i = 0; i < 9; i++){
-			g.drawImage(images[i], pieces[i].getX(), pieces[i].getY(), null );
+			g.drawImage(images[i], pieces[i].getX(), pieces[i].getY(), null);
 		}
 
 		Graphics2D g2 = (Graphics2D) g;
@@ -183,9 +183,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 				dragging = true;
 				moveP[i] = true;
 			}
-			if(grid[i].contains(pressed)){
-				filled[i] = false;
-			}
+			
 		}
 
 		System.out.println("mousePressed at " + pressed);
@@ -201,6 +199,9 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 				if(moveP[i]){
 					pieces[i].setX(drag.x - images[i].getWidth()/2);
 					pieces[i].setY(drag.y - images[i].getHeight()/2);
+				}
+				if(grid[i].contains(drag)){
+					filled[i] = false;
 				}
 			}
 			this.repaint();
@@ -246,13 +247,16 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 					pieces[j].setX(oldX[j]);
 					pieces[j].setY(oldY[j]);
 					filled[i] = false;
-					System.out.println("Not in box");
+					System.out.println("Already Filled");
 				}
 				else if(!box.contains(released) && moveP[j]){
 					pieces[j].setX(oldX[j]);
 					pieces[j].setY(oldY[j]);
 					System.out.println("Not in box");
 				}
+//				if(grid[i].contains(pressed) && filled[i] == true){
+//					filled[i] = false;
+//				}
 			}
 		}
 		//
