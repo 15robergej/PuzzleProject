@@ -16,7 +16,9 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.event.MenuDragMouseListener;
 
 
@@ -32,6 +34,7 @@ public class Display {
 		makeFrame(600,600);
 		panel = new JPanel(new GridBagLayout());
 		frame.add(panel,BorderLayout.NORTH);
+		instructionsButton();
 		restartButton();
 		solveButton();
 		addPuzzle();
@@ -51,7 +54,7 @@ public class Display {
 		restartButton = new JButton("Restart");
 		
 		GridBagConstraints c = new GridBagConstraints();
-		c.gridx = 0;
+		c.gridx = 1;
 		c.gridy = 0;
 		c.insets = new Insets(10, 10, 10, 10);
 	//	c.anchor = GridBagConstraints.LAST_LINE_END;
@@ -83,7 +86,41 @@ public class Display {
 		solveButton.addActionListener(solve);
 	//	solveButton.setBounds(100, 0, 100, 50);
 		GridBagConstraints c = new GridBagConstraints();
-		c.gridx = 1;
+		c.gridx = 2;
+		c.gridy = 0;
+		c.insets = new Insets(10, 10, 10, 10);
+	//	c.anchor = GridBagConstraints.EAST;
+		panel.add(solveButton,c);	
+	}
+	
+	public void instructionsButton() {
+		solveButton = new JButton("Instructions");
+		
+		class SolveListener implements ActionListener {
+			public void actionPerformed(ActionEvent event){
+				JFrame a = new JFrame();	
+				JLabel label = new JLabel("<html><center>Thanks for playing our Puzzle Project!<br>"
+						+ "Drag the pieces to their appropriate places on the grid."
+						+ "<br>To rotate, click on a piece and it will rotate 90 degrees clockwise.<br>"
+						+ "The solve button will put each of the pieces on the board in their correct places and provide one of the 4 solutions to the puzzle."
+						+ "<br>The restart button will remove all the pieces from the board and turn all the pieces back to their original orientation."
+						+ "<br><br>"
+						+ "This project was made by David Chen, Shreya Hegde, Jacquelyn Roberge, Sabrina Tsai, and Jessie Ying</center>"
+						+ "</html>",SwingConstants.CENTER);
+				a.add(label);
+				a.setTitle("Instructions");
+				a.setMinimumSize(new Dimension(500, 300));
+				a.setLocationRelativeTo(frame);
+				a.setVisible(true);
+				System.out.println("Instructions Button pressed.");
+			}
+		}
+		
+		ActionListener solve = new SolveListener();
+		solveButton.addActionListener(solve);
+	//	solveButton.setBounds(100, 0, 100, 50);
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
 		c.gridy = 0;
 		c.insets = new Insets(10, 10, 10, 10);
 	//	c.anchor = GridBagConstraints.EAST;
