@@ -27,6 +27,7 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 //	private boolean dragging = false;
 	private Piece piece;
 	
+//	Graphics g;
 	
 	public static BufferedImage getImage() {
 		return image;
@@ -59,24 +60,36 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 
 	//ctor
 	public PieceComponent(int north, int east, int south, int west, BufferedImage image, int x, int y){
-		this.piece= new Piece(north, east, south, west);
+		this.piece = new Piece(north, east, south, west);
 		setImage(image);
 		this.x = x;
 		this.y = y;
 	}
 	
+	public PieceComponent(Piece piece, BufferedImage image, int x, int y){
+		this.piece = piece;
+		setImage(image);
+		this.x = x;
+		this.y = y;
+	}
 	
 	//rotates once 90 degrees, clockwise
 	public void rotate(){
 		piece.rotate();
-		AffineTransform at = new AffineTransform();
-		at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
-		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-		image = op.filter(image, null);
-		image.createGraphics().drawImage(image, 0, 0, null);
-		
+//		AffineTransform at = new AffineTransform();
+//		at.rotate(Math.PI/2, image.getWidth() / 2, image.getHeight() / 2);
+//		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//		image = op.filter(image, null);
+//		image.createGraphics().drawImage(image, 0, 0, null);
+		this.repaint();
 	}
 
+//	public void paintComponent(){
+//		Graphics2D g2 = (Graphics2D) g;
+//		g2.rotate(90);
+//		this.repaint();
+//	}
+//	
 	
 
 	@Override
@@ -86,15 +99,15 @@ public class PieceComponent extends JComponent implements MouseListener, MouseMo
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Point clicked = e.getPoint();
-		
-		Rectangle bounds = new Rectangle(x, y, getWidth(), getHeight());
-		
-		if(bounds.contains(clicked)){
-			rotate();
-			
-			this.repaint();
-		}
+//		Point clicked = e.getPoint();
+//		
+//		Rectangle bounds = new Rectangle(x, y, getWidth(), getHeight());
+//		
+//		if(bounds.contains(clicked)){
+//			rotate();
+////			paintComponent(g);
+//			this.repaint();
+//		}
 
 	}
 
