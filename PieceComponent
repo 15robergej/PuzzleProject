@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+
 import javax.swing.JComponent;
 
 /*
@@ -44,10 +45,14 @@ public class PieceComponent extends JComponent {
 	public Piece getPiece(){
 		return piece; 
 	}
-//	public boolean getDrag(){
-//		return dragging;
+//	public String pieceToString(){
+//		String p = "";
+//		for(int i = 0; i < 4; i++){
+//			p+= piece.getEdge(i);
+//		}
+//		return p;
 //	}
-	
+
 
 	/*constructor which takes in 4 ints for each side of the piece and a buffered image and
 	 * x and y coordinates for a location. 
