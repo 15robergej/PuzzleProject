@@ -21,7 +21,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	//boolean for whether or not a piece is being moved/dragged
 
 	private boolean [] moveP = {false, false, false, false, false, false, false, false, false};
-	
+
 	private boolean [] filled = {false, false, false, false, false, false, false, false, false};
 
 	int HEARTS_IN = -1;
@@ -34,17 +34,16 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	int SPADES_OUT = 4;
 
 	private Puzzle p = new Puzzle(3, 3);
-	
+
 	private PieceComponent[] pieces = new PieceComponent[9];
 
 	private BufferedImage[] images = new BufferedImage[9];
 
 	private Rectangle[] bounds= new Rectangle[9];
-	
+
 	private int [] oldX = {0, 0, 0, 0, 0, 120, 120, 120, 120};
-	
 	private int [] oldY = {0, 120, 240, 360, 480, 20, 140, 260, 380};
-	
+
 	private Rectangle g1 = new Rectangle(450, 150, 70, 70);
 	private Rectangle g2 = new Rectangle(450, 220, 70, 70);
 	private Rectangle g3 = new Rectangle(450, 290, 70, 70);
@@ -57,12 +56,13 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	private Rectangle box = new Rectangle(450, 150, 210, 210);
 
 	private Rectangle[] grid = {g1, g2, g3, g4, g5, g6, g7, g8, g9};
-	
-	
-	
+
+	private int[] gRow={0,1,2,0,1,2,0,1,2};
+	private int[] gCol={0,0,0,1,1,1,2,2,2};
+
 	public void restart(){
 		p.restart();
-		
+
 		try {                 
 			images[0] = ImageIO.read(this.getClass().getResource("piece_1.png"));
 			images[1] = ImageIO.read(this.getClass().getResource("piece_2.png"));
@@ -79,7 +79,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		} catch (IOException ex) {
 			System.out.println("image not found");
 		}		
-		
+
 		pieces[0] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
 		pieces[1] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
 		pieces[2] = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
@@ -89,14 +89,14 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		pieces[6] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
 		pieces[7] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
 		pieces[8] = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
-		
+
 		for(int i = 0; i < 9; i ++){
 			filled[i] = false;
 		}
-		
+
 		this.repaint();
 	}
-	
+
 	public void solve(){
 		p.solve();
 	}
@@ -108,22 +108,20 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		restart();
 	}
 
-
-
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for(int i = 0; i < 9; i++){
 			g.drawImage(images[i], pieces[i].getX(), pieces[i].getY(), null);
 		}
-		
+
 		Graphics2D g2 = (Graphics2D) g;
-		
+
 		for(int i = 0; i < 9; i ++){
 			g2.setColor(Color.BLUE);
 			g2.draw(grid[i]);
 		}
-		
-		
+
+
 		//MAKES THE GRID 100 by 100 px.
 		for (int y = 150; y <= 360; y += 70){
 			g2.setColor(Color.BLACK);
@@ -134,20 +132,26 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 			Line2D.Double segment2 = new Line2D.Double(x, 150, x, 360);
 			g2.draw(segment2);
 		}
-		
-		
+
+
 	}
 
-//	public void rotatePiece(PieceComponent p){
-//		p.rotate();
-////		AffineTransform at = new AffineTransform();
-////		at.rotate(Math.PI/2, p.getWidth() / 2, p.getHeight() / 2);
-////		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-////		p.setImage(op.filter(p.getImage(), null));
-////		p.getImage().createGraphics().drawImage(p.getImage(), 0, 0, null);
-//		
-//		this.repaint();
-//	}
+	public boolean pieceFits(PieceComponent piece, int row, int col){
+		if(p.doesFit(row,col,piece.getPiece()))
+			return true;
+		return false;
+	}
+	
+	//	public void rotatePiece(PieceComponent p){
+	//		p.rotate();
+	////		AffineTransform at = new AffineTransform();
+	////		at.rotate(Math.PI/2, p.getWidth() / 2, p.getHeight() / 2);
+	////		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+	////		p.setImage(op.filter(p.getImage(), null));
+	////		p.getImage().createGraphics().drawImage(p.getImage(), 0, 0, null);
+	//		
+	//		this.repaint();
+	//	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
@@ -165,24 +169,24 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		for(int i = 0; i < 9; i++){
 			if(bounds[i].contains(clicked)){
 				System.out.println("p" + i + " clicked");
-			AffineTransform at = new AffineTransform();
-			at.rotate(Math.PI/2, images[i].getWidth() / 2, images[i].getHeight() / 2);
-			AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			images[i]= op.filter(images[i], null);
-			images[i].createGraphics().drawImage(images[i], 0, 0, null);
-			this.repaint();
-		//	rotatePiece(pieces[i]);
+				AffineTransform at = new AffineTransform();
+				at.rotate(Math.PI/2, images[i].getWidth() / 2, images[i].getHeight() / 2);
+				AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+				images[i]= op.filter(images[i], null);
+				images[i].createGraphics().drawImage(images[i], 0, 0, null);
+				this.repaint();
+				//	rotatePiece(pieces[i]);
 			}
 		}
 
 	}
-	
+
 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		Point pressed = e.getPoint();
-//IMAGE WIDTH & HEIGHT ARE BOTH 118px.
+		//IMAGE WIDTH & HEIGHT ARE BOTH 118px.
 		for(int i = 0; i < 9; i++){
 			bounds[i] = new Rectangle(pieces[i].getX() + 25, pieces[i].getY() + 25, images[i].getWidth() - 50, images[i].getHeight() - 50);
 		}
@@ -192,7 +196,11 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 				dragging = true;
 				moveP[i] = true;
 			}
-			
+			if(grid[i].contains(pressed)){
+				filled[i] = false;
+				p.removePiece(gRow[i], gCol[i]);
+			}
+
 		}
 
 		System.out.println("mousePressed at " + pressed);
@@ -209,9 +217,6 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 					pieces[i].setX(drag.x - images[i].getWidth()/2);
 					pieces[i].setY(drag.y - images[i].getHeight()/2);
 				}
-				if(grid[i].contains(drag)){
-					filled[i] = false;
-				}
 			}
 			this.repaint();
 		}
@@ -223,82 +228,55 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		dragging = false;
 
 		Point released = e.getPoint();
-		
-			
-//			pieces[0] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, DIAMONDS_IN, CLUBS_IN, images[0], 0, 0);
-//			pieces[1] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, SPADES_IN, HEARTS_IN, images[1], 0, 120);
-//			pieces[2] = new PieceComponent(HEARTS_OUT, SPADES_OUT, SPADES_IN, CLUBS_IN, images[2], 0, 240);
-//			pieces[3] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, CLUBS_IN, CLUBS_IN, images[3], 0, 360);
-//			pieces[4] = new PieceComponent(SPADES_OUT, SPADES_OUT, HEARTS_IN, CLUBS_IN, images[4], 0, 480);
-//			pieces[5] = new PieceComponent(HEARTS_OUT, DIAMONDS_OUT, DIAMONDS_IN, HEARTS_IN, images[5], 120, 20);
-//			pieces[6] = new PieceComponent(SPADES_OUT, DIAMONDS_OUT, HEARTS_OUT, DIAMONDS_OUT, images[6], 120, 140);
-//			pieces[7] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
-//			pieces[8] = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
-
-
-	
 
 		//if dropped in the grid, allow piece to stay
 		//otherwise send piece back to default position (<--maybe??)
-		
-		
-		
+
 
 		for(int i = 0; i < 9; i ++){
 			for(int j = 0; j < 9; j++){
-				if(grid[i].contains(released) && moveP[j] && filled[i] == false){
-					pieces[j].setX((int)grid[i].getX() - 23);
-					pieces[j].setY((int)grid[i].getY() - 23);
-					filled[i] = true;
-					System.out.println("IN GRID");
+				if(moveP[j]){
+					if(grid[i].contains(released) && filled[i] == false && pieceFits(pieces[j], gRow[i], gCol[i])){ 
+						pieces[j].setX((int)grid[i].getX() - 23);
+						pieces[j].setY((int)grid[i].getY() - 23);
+						filled[i] = true;
+						p.setPiece(gRow[i], gCol[i], pieces[j].getPiece());
+						System.out.println("IN GRID");
+					}
+					else if(!box.contains(released)){
+						pieces[j].setX(oldX[j]);
+						pieces[j].setY(oldY[j]);
+						System.out.println("not in box");
+					}
+					else if(grid[i].contains(released) && filled[i] == true){
+						pieces[j].setX(oldX[j]);
+						pieces[j].setY(oldY[j]);
+						System.out.println("already filled");
+					}
+					else if(grid[i].contains(released) && !pieceFits(pieces[j], gRow[i], gCol[i])){
+						pieces[j].setX(oldX[j]);
+						pieces[j].setY(oldY[j]);
+						System.out.println("piece doesn't fit");
+						System.out.println("row-"+ gRow[i]);
+						System.out.println("col-"+ gCol[i]);
+					//	System.out.println("piece-"+ pieces[j].pieceToString());
+					}
+					
+					//this works, but doesn't account for doesFit
+//					else if(!box.contains(released) || grid[i].contains(released) && filled[i] == true){
+//						pieces[j].setX(oldX[j]);
+//						pieces[j].setY(oldY[j]);
+//						System.out.println("piece doesn't fit/not in box/already filled");
+//					}
 				}
-				else if(!box.contains(released) && moveP[j] && filled[i] == true){
-					pieces[j].setX(oldX[j]);
-					pieces[j].setY(oldY[j]);
-					filled[i] = false;
-					System.out.println("Already Filled");
-				}
-				else if(!box.contains(released) && moveP[j]){
-					pieces[j].setX(oldX[j]);
-					pieces[j].setY(oldY[j]);
-					System.out.println("Not in box");
-				}
-//				if(grid[i].contains(pressed) && filled[i] == true){
-//					filled[i] = false;
-//				}
 			}
 		}
-		//
-		//		if (g1.contains(released)&&movep1) {
-		//			x1=426;
-		//			y1=126;
-		//			System.out.println("in grid spot 1-- (0,0)");
-		//		}
-		//		else if (g2.contains(released)&&movep1) {
-		//			x1=426;
-		//			y1=196;
-		//			//System.out.println("in grid spot 2-- (0,1)");
-		//		}
-		//		else{
-		//			//move back to default spot???????
-		//			
-		//		}
+
 		this.repaint();
 
 		for(int i = 0; i < 9; i++){
 			moveP[i] = false;
 		}
-
-
-		//		
-		//		for(int i=0; i<3; i++){
-		//			for(int j=0; j<0; j++){
-		//				if(p.doesFit(i,j,p1)){
-		//					p.setPiece(0,0,p1);
-		//					//allow image to be put down in spot in grid
-		//				}
-		//			}
-		//		}
 
 	}
 
