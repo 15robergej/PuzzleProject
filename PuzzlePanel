@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -44,16 +45,16 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	
 	private int [] oldY = {0, 120, 240, 360, 480, 20, 140, 260, 380};
 	
-	private Rectangle g1 = new Rectangle(426, 126, 70, 70);
-	private Rectangle g2 = new Rectangle(426, 196, 70, 70);
-	private Rectangle g3 = new Rectangle(426, 266, 70, 70);
-	private Rectangle g4 = new Rectangle(496, 126, 70, 70);
-	private Rectangle g5 = new Rectangle(496, 196, 70, 70);
-	private Rectangle g6 = new Rectangle(496, 266, 70, 70);
-	private Rectangle g7 = new Rectangle(566, 126, 70, 70);
-	private Rectangle g8 = new Rectangle(566, 196, 70, 70);
-	private Rectangle g9 = new Rectangle(566, 266, 70, 70);
-	private Rectangle box = new Rectangle(426, 126, 210, 210);
+	private Rectangle g1 = new Rectangle(450, 150, 70, 70);
+	private Rectangle g2 = new Rectangle(450, 220, 70, 70);
+	private Rectangle g3 = new Rectangle(450, 290, 70, 70);
+	private Rectangle g4 = new Rectangle(520, 150, 70, 70);
+	private Rectangle g5 = new Rectangle(520, 220, 70, 70);
+	private Rectangle g6 = new Rectangle(520, 290, 70, 70);
+	private Rectangle g7 = new Rectangle(590, 150, 70, 70);
+	private Rectangle g8 = new Rectangle(590, 220, 70, 70);
+	private Rectangle g9 = new Rectangle(590, 290, 70, 70);
+	private Rectangle box = new Rectangle(450, 150, 210, 210);
 
 	private Rectangle[] grid = {g1, g2, g3, g4, g5, g6, g7, g8, g9};
 	
@@ -114,10 +115,18 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		for(int i = 0; i < 9; i++){
 			g.drawImage(images[i], pieces[i].getX(), pieces[i].getY(), null);
 		}
-
+		
 		Graphics2D g2 = (Graphics2D) g;
+		
+		for(int i = 0; i < 9; i ++){
+			g2.setColor(Color.BLUE);
+			g2.draw(grid[i]);
+		}
+		
+		
 		//MAKES THE GRID 100 by 100 px.
 		for (int y = 150; y <= 360; y += 70){
+			g2.setColor(Color.BLACK);
 			Line2D.Double segment = new Line2D.Double(450, y, 660, y);
 			g2.draw(segment);
 		}
@@ -238,8 +247,8 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		for(int i = 0; i < 9; i ++){
 			for(int j = 0; j < 9; j++){
 				if(grid[i].contains(released) && moveP[j] && filled[i] == false){
-					pieces[j].setX((int)grid[i].getX());
-					pieces[j].setY((int)grid[i].getY());
+					pieces[j].setX((int)grid[i].getX() - 23);
+					pieces[j].setY((int)grid[i].getY() - 23);
 					filled[i] = true;
 					System.out.println("IN GRID");
 				}
