@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionListener{
 
+	//private data
+	
 	private boolean dragging = false;
 	//boolean for whether or not a piece is being moved/dragged
 
@@ -44,6 +46,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	private int [] oldX = {0, 0, 0, 0, 0, 120, 120, 120, 120};
 	private int [] oldY = {0, 120, 240, 360, 480, 20, 140, 260, 380};
 
+	//private data corresponding to each square on the grid 
 	private Rectangle g1 = new Rectangle(450, 150, 70, 70);
 	private Rectangle g2 = new Rectangle(450, 220, 70, 70);
 	private Rectangle g3 = new Rectangle(450, 290, 70, 70);
@@ -60,6 +63,8 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	private int[] gRow={0,1,2,0,1,2,0,1,2};
 	private int[] gCol={0,0,0,1,1,1,2,2,2};
 
+	//restart method returns the board to its empty state and clears the puzzle
+	//and repaints it
 	public void restart(){
 		p.restart();
 
@@ -97,17 +102,19 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		this.repaint();
 	}
 
+	//method to solve the puzzle
 	public void solve(){
 		p.solve();
 	}
 
-
+	//default constructor 
 	public PuzzlePanel() {
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		restart();
 	}
 
+	//paintComponent method to draw the grid and images on to the frame
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for(int i = 0; i < 9; i++){
@@ -136,23 +143,15 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 
 	}
 
+	//method to determine if a piece fits in a certain location on the puzzle
+	//returns true if it fits, false if not
 	public boolean pieceFits(PieceComponent piece, int row, int col){
 		if(p.doesFit(row,col,piece.getPiece()))
 			return true;
 		return false;
 	}
 	
-	//	public void rotatePiece(PieceComponent p){
-	//		p.rotate();
-	////		AffineTransform at = new AffineTransform();
-	////		at.rotate(Math.PI/2, p.getWidth() / 2, p.getHeight() / 2);
-	////		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-	////		p.setImage(op.filter(p.getImage(), null));
-	////		p.getImage().createGraphics().drawImage(p.getImage(), 0, 0, null);
-	//		
-	//		this.repaint();
-	//	}
-
+	
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -160,6 +159,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	}
 
 	@Override
+	//if the mouse is clicked, the pieceComponent is rotated 90 degrees clockwise
 	public void mouseClicked(MouseEvent e) {
 		Point clicked = e.getPoint();
 		for(int i = 0; i < 9; i++){
@@ -184,6 +184,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 
 
 	@Override
+	//
 	public void mousePressed(MouseEvent e) {
 		Point pressed = e.getPoint();
 		//IMAGE WIDTH & HEIGHT ARE BOTH 118px.
@@ -208,6 +209,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 	}
 
 	@Override
+	//method that allows a certain pieceComponent to be dragged to a spot on the grid
 	public void mouseDragged(MouseEvent e) {
 		Point drag = e.getPoint();
 
@@ -230,7 +232,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		Point released = e.getPoint();
 
 		//if dropped in the grid, allow piece to stay
-		//otherwise send piece back to default position (<--maybe??)
+		//otherwise send piece back to default position 
 
 
 		for(int i = 0; i < 9; i ++){
