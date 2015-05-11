@@ -24,12 +24,14 @@ import javax.swing.event.MenuDragMouseListener;
 
 public class Display {
 	
+	//private data
 	private JFrame frame;
 	private JPanel panel;
 	private PuzzlePanel puzzlePanel;
 	private JButton restartButton, solveButton;
 	private JPanel board;
 	
+	//default constructor makes a Display object
 	public Display(){
 		makeFrame(600,600);
 		panel = new JPanel(new GridBagLayout());
@@ -41,6 +43,8 @@ public class Display {
 		frame.setVisible(true);
 	}
 	
+	//method to create a frame of a certain width and height.
+	//creates a frame and sets the title and size
 	public void makeFrame(int width, int height) {
 		frame = new JFrame();	
 		frame.setTitle("Puzzle");
@@ -49,7 +53,8 @@ public class Display {
 		frame.setSize(width, height);
 	}
 	
-	
+	//method that creates a restart button and gives it appropriate function. 
+	//once pressed, it calls the restart method on puzzlePanel. 
 	public void restartButton() {
 		restartButton = new JButton("Restart");
 		
@@ -64,7 +69,7 @@ public class Display {
 			public void actionPerformed(ActionEvent event){
 				puzzlePanel.restart();
 				System.out.println("Restart button pressed.");
-				//what it does
+				
 			}
 		}
 		ActionListener restart = new RestartListener();
@@ -72,6 +77,8 @@ public class Display {
 	
 	}
 	
+	//creates a solve button which solves the puzzle when pressed. 
+	//the method calls the solve method on puzzlePanel
 	public void solveButton() {
 		solveButton = new JButton("Solve");
 		
@@ -93,6 +100,8 @@ public class Display {
 		panel.add(solveButton,c);	
 	}
 	
+	//creates an instructions button which provides the user of the program
+	//with necessary instructions to play the puzzle. 
 	public void instructionsButton() {
 		solveButton = new JButton("Instructions");
 		
@@ -127,9 +136,10 @@ public class Display {
 		panel.add(solveButton,c);	
 	}
 	
+	//method to add a board onto a panel
 	public void addBoard() {
 		
-		board = new JPanel(new GridBagLayout()); //layout??
+		board = new JPanel(new GridBagLayout()); 
 	
 		board.setBackground(Color.blue);
 		board.setVisible(true);
@@ -138,6 +148,7 @@ public class Display {
 	
 	}
 	
+	//method that creates a puzzle and adds it to the frame
 	public void addPuzzle(){
 		
 		puzzlePanel = new PuzzlePanel();
@@ -146,10 +157,9 @@ public class Display {
 		
 	}
 	
+	//main method which creates the display object that sdrives the program 
 	public static void main(String[] args){
 		Display display = new Display();
 		
 	}
 }
-
-	           
