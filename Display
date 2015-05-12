@@ -22,16 +22,24 @@ import javax.swing.SwingConstants;
 import javax.swing.event.MenuDragMouseListener;
 
 
+/*
+ * Display class allows the painting and display of a Puzzle object onto
+ * a frame. This class also contains necessary buttons and instructions for the
+ * Puzzle to work as needed. 
+ * 
+ * By Jacquelyn, Sabrina, and Jessie
+ */
+
 public class Display {
 	
-	//private data
+	//private data 
 	private JFrame frame;
 	private JPanel panel;
 	private PuzzlePanel puzzlePanel;
 	private JButton restartButton, solveButton;
 	private JPanel board;
 	
-	//default constructor makes a Display object
+	//default constructor creates a Display object
 	public Display(){
 		makeFrame(600,600);
 		panel = new JPanel(new GridBagLayout());
@@ -69,7 +77,7 @@ public class Display {
 			public void actionPerformed(ActionEvent event){
 				puzzlePanel.restart();
 				System.out.println("Restart button pressed.");
-				
+				//what it does
 			}
 		}
 		ActionListener restart = new RestartListener();
@@ -101,7 +109,7 @@ public class Display {
 	}
 	
 	//creates an instructions button which provides the user of the program
-	//with necessary instructions to play the puzzle. 
+		//with necessary instructions to play the puzzle. 
 	public void instructionsButton() {
 		solveButton = new JButton("Instructions");
 		
@@ -139,7 +147,7 @@ public class Display {
 	//method to add a board onto a panel
 	public void addBoard() {
 		
-		board = new JPanel(new GridBagLayout()); 
+		board = new JPanel(new GridBagLayout()); //layout??
 	
 		board.setBackground(Color.blue);
 		board.setVisible(true);
@@ -157,7 +165,7 @@ public class Display {
 		
 	}
 	
-	//main method which creates the display object that sdrives the program 
+	//main method which creates the display object that drives the program 
 	public static void main(String[] args){
 		Display display = new Display();
 		
