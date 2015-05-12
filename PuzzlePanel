@@ -16,6 +16,13 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+/*
+ * PuzzlePanel class contains all the methods necessary to allow the 
+ * puzzle to function as needed. Defines methods for Pieces to be rotated,
+ * dragged, moved and released on to different areas of the grid.
+ * 
+ * By Jacquelyn, Sabrina, and Jessie
+ */
 
 public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionListener{
 
@@ -40,6 +47,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 
 	private PieceComponent[] pieces = new PieceComponent[9];
 	ArrayList<Piece> a ;
+	
 	private BufferedImage[] images = new BufferedImage[9];
 
 	private Rectangle[] bounds= new Rectangle[9];
@@ -81,7 +89,7 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 
 
 	//restart method returns the board to its empty state and clears the puzzle
-		//and repaints it
+	//and repaints it
 	public void restart(){
 		p.restart();
 
@@ -110,18 +118,31 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		pieces[7] = new PieceComponent(CLUBS_OUT, HEARTS_OUT, SPADES_IN, HEARTS_IN, images[7], 120, 260);
 		pieces[8] = new PieceComponent(CLUBS_OUT, CLUBS_IN, DIAMONDS_IN, DIAMONDS_OUT, images[8], 120, 380);
 
+		a= new ArrayList<Piece>(pieces.length);
+
+		for(int i=0; i<pieces.length; i++){
+			a.add(pieces[i].getPiece());
+		}
+
+		p = new Puzzle(3, 3, a);
+		
 		for(int i = 0; i < 9; i ++){
 			filled[i] = false;
 		}
+		
 		this.repaint();
 	}
 
+	
+	
+	
 	//method which solves the puzzle and displays the solved solution
 	//on to the grid 
 	public void solve(){
 
+		restart();
 		p.solve();
-
+	
 		for(int col = 0; col < 3; col++){
 			for(int row = 0; row<3; row++){
 
@@ -173,7 +194,6 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 							images[k].createGraphics().drawImage(images[k], 0, 0, null);
 						}
 
-
 					}
 				}
 			}
@@ -222,18 +242,18 @@ public class PuzzlePanel extends JPanel implements MouseListener, MouseMotionLis
 		for(int i=0; i<pieces.length; i++){
 			a.add(pieces[i].getPiece());
 		}
-
-
 		p = new Puzzle(3, 3, a);
+		
+		
 		addMouseListener(this);
 		addMouseMotionListener(this);
 
 	}
 
 
-
 	//paintComponent method to draw the grid and 
 	//places the piece images on to the frame
+	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		for(int i = 0; i < 9; i++){
